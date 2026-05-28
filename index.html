@@ -42,6 +42,7 @@
     <div class="verb-list-toggle">
       <button class="btn-ghost" id="btn-show-list">Ver todos los verbos</button>
       <button class="btn-ghost" id="btn-show-kb">📚 Notas de clase</button>
+      <button class="btn-ghost" id="btn-show-food">🍽️ Vocabulario comida</button>
     </div>
   </div>
 
@@ -443,6 +444,44 @@
 
     </div><!-- /kb-content -->
   </div><!-- /view-kb -->
+
+  <!-- ===== FOOD VOCABULARY QUIZ ===== -->
+  <div id="view-food" class="view">
+    <div class="view-header compact">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <span id="food-progress-label" class="progress-label">1 / 28</span>
+    </div>
+    <div class="quiz-progress-bar">
+      <div id="food-progress-fill" class="quiz-progress-fill"></div>
+    </div>
+    <div class="quiz-gif-wrap">
+      <img id="food-gif" class="quiz-gif" alt="" src="" hidden>
+      <div id="food-gif-ph" class="quiz-gif-placeholder">
+        <span id="food-gif-emoji" class="quiz-gif-emoji"></span>
+      </div>
+    </div>
+    <div id="food-scaffold" class="quiz-scaffold food-scaffold"></div>
+    <div id="food-options" class="quiz-options"></div>
+    <div id="food-feedback" class="quiz-feedback hidden">
+      <div id="food-feedback-icon" class="feedback-icon"></div>
+      <div id="food-feedback-text" class="feedback-text"></div>
+      <img id="food-correct-gif" class="quiz-correct-gif" alt="" src="" hidden>
+      <div id="food-rationale" class="quiz-rationale"></div>
+      <button class="btn-primary" id="btn-food-next">Siguiente &#8594;</button>
+    </div>
+  </div>
+
+  <!-- FOOD RESULT -->
+  <div id="view-food-result" class="view">
+    <div class="result-wrap">
+      <div class="result-trophy">🥗</div>
+      <h2 class="result-title">¡Vocabulario completado!</h2>
+      <div class="result-score-big" id="food-result-score">0</div>
+      <div class="result-subtitle" id="food-result-subtitle">de 28 correctas</div>
+      <button class="btn-primary" id="btn-food-restart">Intentar de nuevo</button>
+      <button class="btn-ghost"  id="btn-food-home">Ir al inicio</button>
+    </div>
+  </div>
 
   <script src="js/storage.js"></script>
   <script src="js/giphy.js"></script>

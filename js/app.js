@@ -224,8 +224,7 @@
     showView('flashcard');
   }
 
-  function showFeedbackGif(gifPromise) {
-    const gifEl = $('quiz-correct-gif');
+  function showFeedbackGif(gifPromise, gifEl) {
     gifEl.hidden = true;
     gifEl.src = '';
     gifPromise.then(url => {
@@ -237,11 +236,11 @@
     });
   }
 
-  function setGif(imgId, placeholderId, emojiId, verbKey) {
+  function setGif(imgId, placeholderId, emojiId, verbKey, emojiOverride) {
     const img = $(imgId);
     const ph = $(placeholderId);
     const em = emojiId ? $(emojiId) : null;
-    if (em) em.textContent = Giphy.getEmoji(verbKey);
+    if (em) em.textContent = emojiOverride || Giphy.getEmoji(verbKey);
 
     // Reset src first so onload always fires, even if the next URL is the same
     img.hidden = true;
@@ -363,7 +362,7 @@
       btn.classList.add('correct');
       currentQuizCorrect++;
       $('quiz-scaffold').innerHTML = renderAnswered(q.scaffold, q.correct_answer, true);
-      showFeedbackGif(Giphy.getCelebrationGif());
+      showFeedbackGif(Giphy.getCelebrationGif(), $('quiz-correct-gif'));
     } else {
       btn.classList.add('wrong');
       quizWrong.push(q);
@@ -371,7 +370,7 @@
         if (b.textContent === q.correct_answer) b.classList.add('correct');
       });
       $('quiz-scaffold').innerHTML = renderAnswered(q.scaffold, q.correct_answer, false);
-      showFeedbackGif(Giphy.getWrongGif());
+      showFeedbackGif(Giphy.getWrongGif(), $('quiz-correct-gif'));
     }
 
     const fb = $('quiz-feedback');
@@ -595,6 +594,126 @@
   });
 
   $('btn-show-kb').addEventListener('click', () => showView('kb'));
+
+  // --- FOOD VOCABULARY QUIZ ---
+  const FOOD_VOCAB = [
+    { en: 'soup',        es: 'sopa',           emoji: '🍲' },
+    { en: 'bread',       es: 'pan',            emoji: '🍞' },
+    { en: 'sandwich',    es: 'sándwich',        emoji: '🥪' },
+    { en: 'crackers',    es: 'galletas de sal', emoji: '🫙' },
+    { en: 'chicken',     es: 'pollo',           emoji: '🍗' },
+    { en: 'steak',       es: 'bistec',          emoji: '🥩' },
+    { en: 'fish',        es: 'pescado',         emoji: '🐟' },
+    { en: 'beef',        es: 'carne de res',    emoji: '🥩' },
+    { en: 'lamb',        es: 'cordero',         emoji: '🐑' },
+    { en: 'rice',        es: 'arroz',           emoji: '🍚' },
+    { en: 'potatoes',    es: 'papas',           emoji: '🥔' },
+    { en: 'green beans', es: 'habichuelas',     emoji: '🫘' },
+    { en: 'vegetables',  es: 'verduras',        emoji: '🥦' },
+    { en: 'tomato',      es: 'tomate',          emoji: '🍅' },
+    { en: 'apple',       es: 'manzana',         emoji: '🍎' },
+    { en: 'banana',      es: 'banano',          emoji: '🍌' },
+    { en: 'orange',      es: 'naranja',         emoji: '🍊' },
+    { en: 'pineapple',   es: 'piña',            emoji: '🍍' },
+    { en: 'coconut',     es: 'coco',            emoji: '🥥' },
+    { en: 'cheese',      es: 'queso',           emoji: '🧀' },
+    { en: 'butter',      es: 'mantequilla',     emoji: '🧈' },
+    { en: 'egg',         es: 'huevo',           emoji: '🥚' },
+    { en: 'ice cream',   es: 'helado',          emoji: '🍦' },
+    { en: 'dessert',     es: 'postre',          emoji: '🍰' },
+    { en: 'juice',       es: 'jugo',            emoji: '🧃' },
+    { en: 'water',       es: 'agua',            emoji: '💧' },
+    { en: 'soda',        es: 'gaseosa',         emoji: '🥤' },
+    { en: 'coffee',      es: 'café',            emoji: '☕' },
+  ];
+
+  let foodItems  = [];
+  let foodQIdx   = 0;
+  let foodScore  = 0;
+
+  function startFoodQuiz() {
+    foodItems = [...FOOD_VOCAB].sort(() => Math.random() - .5);
+    foodQIdx  = 0;
+    foodScore = 0;
+    showView('food');
+    renderFoodQuestion();
+  }
+
+  function renderFoodQuestion() {
+    const item  = foodItems[foodQIdx];
+    const total = foodItems.length;
+
+    $('food-progress-label').textContent = `${foodQIdx + 1} / ${total}`;
+    $('food-progress-fill').style.width  = `${(foodQIdx / total) * 100}%`;
+
+    // GIF unique to this food word, with its own emoji placeholder
+    setGif('food-gif', 'food-gif-ph', 'food-gif-emoji', item.en, item.emoji);
+
+    // Scaffold: show English word as the question
+    $('food-scaffold').innerHTML =
+      `<span class="food-q-label">¿Cómo se dice en español?</span>` +
+      `<span class="food-q-word">${item.en}</span>`;
+
+    // 4 options: 1 correct + 3 random wrong Spanish words
+    const wrong = FOOD_VOCAB
+      .filter(f => f.en !== item.en)
+      .sort(() => Math.random() - .5)
+      .slice(0, 3)
+      .map(f => f.es);
+    const opts = [...wrong, item.es].sort(() => Math.random() - .5);
+
+    $('food-feedback').classList.add('hidden');
+    $('food-correct-gif').hidden = true;
+
+    const optEl = $('food-options');
+    optEl.innerHTML = '';
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => selectFoodAnswer(btn, opt, item));
+      optEl.appendChild(btn);
+    });
+  }
+
+  function selectFoodAnswer(btn, chosen, item) {
+    $('food-options').querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    const correct = chosen === item.es;
+
+    if (correct) {
+      btn.classList.add('correct');
+      foodScore++;
+      showFeedbackGif(Giphy.getCelebrationGif(), $('food-correct-gif'));
+    } else {
+      btn.classList.add('wrong');
+      $('food-options').querySelectorAll('.option-btn').forEach(b => {
+        if (b.textContent === item.es) b.classList.add('correct');
+      });
+      showFeedbackGif(Giphy.getWrongGif(), $('food-correct-gif'));
+    }
+
+    $('food-feedback-icon').textContent = correct ? '✅' : '❌';
+    $('food-feedback-text').textContent = correct ? '¡Correcto!' : 'Incorrecto';
+    $('food-rationale').textContent = `${item.en} = ${item.es}`;
+    $('food-feedback').classList.remove('hidden');
+    btn.classList.add(correct ? 'bounce-in' : 'shake');
+  }
+
+  $('btn-food-next').addEventListener('click', () => {
+    foodQIdx++;
+    if (foodQIdx < foodItems.length) {
+      renderFoodQuestion();
+    } else {
+      $('food-result-score').textContent   = foodScore;
+      $('food-result-subtitle').textContent = `de ${foodItems.length} correctas`;
+      showView('food-result');
+    }
+  });
+
+  $('btn-food-restart').addEventListener('click', startFoodQuiz);
+  $('btn-food-home').addEventListener('click', () => { renderHome(); showView('home'); });
+
+  $('btn-show-food').addEventListener('click', startFoodQuiz);
 
   // --- Init ---
   // Purge old single-URL gif cache entries (gif_ prefix) from previous version
