@@ -49,6 +49,28 @@
     $('toggle-dark').checked = settings.darkMode;
   }
 
+  // --- Audio ---
+  const _audio = new Audio();
+
+  function playAudio(word) {
+    _audio.src = `data/audios/${word.trim().toLowerCase()}.mp3`;
+    _audio.play().catch(() => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(word);
+        u.lang = 'en-US';
+        u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+      }
+    });
+  }
+
+  function speakVerb(form) {
+    const parts = form.split('/').map(p => p.trim()).filter(Boolean);
+    playAudio(parts[0]);
+    if (parts[1]) setTimeout(() => playAudio(parts[1]), 900);
+  }
+
   // --- HOME view ---
   function renderHome() {
     state = Storage.updateStreak(state);
@@ -162,15 +184,28 @@
     currentQuizCorrect = 0;
     quizWrong = [];
 
-    // Reset card to front
+    // Reset GIF rotation so the first question of this verb starts from a fresh URL
+    Giphy.resetIndex(verb.key);
+
     $('flashcard').classList.remove('flipped');
 
     $('fc-verb-index').textContent = `${idx + 1} / ${verbos.length}`;
     $('fc-base').textContent = verb.base_form;
     $('fc-meaning').textContent = verb.meaning_es;
-    $('fc-past').textContent = verb.simple_past;
 
-    // Grammar rules on back of card
+    // Build past row: one chip+button per form (handles "was/were", "showed/shown", etc.)
+    const pastParts = verb.simple_past.split('/').map(p => p.trim()).filter(Boolean);
+    const pastRow = $('fc-past-row');
+    pastRow.innerHTML = pastParts.map(p =>
+      `<div class="fc-past-part">
+         <div class="fc-past-form">${p}</div>
+         <button class="speak-btn fc-speak-past" data-word="${p}" aria-label="Escuchar ${p}">🔊</button>
+       </div>`
+    ).join('');
+    pastRow.querySelectorAll('.fc-speak-past').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); playAudio(btn.dataset.word); });
+    });
+
     const gr = verb.grammar_rules;
     const grEl = $('fc-grammar-rules');
     if (gr) {
@@ -182,10 +217,24 @@
       grEl.innerHTML = '';
     }
 
-    // GIF
-    setGif('fc-gif', 'fc-gif-placeholder', 'fc-gif-emoji', verb.key);
+    // Wire base form audio button (stopPropagation so it doesn't flip the card)
+    $('btn-speak-base').onclick = e => { e.stopPropagation(); playAudio(verb.base_form); };
 
+    setGif('fc-gif', 'fc-gif-placeholder', 'fc-gif-emoji', verb.key);
     showView('flashcard');
+  }
+
+  function showFeedbackGif(gifPromise) {
+    const gifEl = $('quiz-correct-gif');
+    gifEl.hidden = true;
+    gifEl.src = '';
+    gifPromise.then(url => {
+      if (!url) return;
+      gifEl.onload  = () => { gifEl.hidden = false; };
+      gifEl.onerror = () => {};
+      gifEl.src = url;
+      if (gifEl.complete && gifEl.naturalWidth > 0) gifEl.hidden = false;
+    });
   }
 
   function setGif(imgId, placeholderId, emojiId, verbKey) {
@@ -193,14 +242,21 @@
     const ph = $(placeholderId);
     const em = emojiId ? $(emojiId) : null;
     if (em) em.textContent = Giphy.getEmoji(verbKey);
+
+    // Reset src first so onload always fires, even if the next URL is the same
     img.hidden = true;
+    img.src = '';
     ph.style.display = 'flex';
 
     Giphy.getGif(verbKey).then(url => {
-      if (url) {
-        img.src = url;
-        img.onload = () => { img.hidden = false; ph.style.display = 'none'; };
-        img.onerror = () => { img.hidden = true; ph.style.display = 'flex'; };
+      if (!url) return;
+      img.onload  = () => { img.hidden = false; ph.style.display = 'none'; };
+      img.onerror = () => { img.hidden = true;  ph.style.display = 'flex'; };
+      img.src = url;
+      // If the browser already has it decoded (complete), show immediately
+      if (img.complete && img.naturalWidth > 0) {
+        img.hidden = false;
+        ph.style.display = 'none';
       }
     });
   }
@@ -223,17 +279,16 @@
     currentQIdx = 0;
     currentQuizCorrect = 0;
     quizWrong = [];
-    setGif('quiz-gif', 'quiz-gif-placeholder', 'quiz-gif-emoji', currentVerb.key);
     showView('quiz');
     renderQuestion();
   }
 
   const TYPE_CHIP = {
-    wh_question:           { label: '? Pregunta',          cls: 'chip-blue' },
-    yes_no_question:       { label: '? Sí / No',           cls: 'chip-blue' },
+    wh_question:           { label: '? Pregunta',           cls: 'chip-blue'   },
+    yes_no_question:       { label: '? Sí / No',            cls: 'chip-blue'   },
     affirmative_statement: { label: '✏ Completa la oración', cls: 'chip-purple' },
-    negative_statement:    { label: '✗ Forma negativa',    cls: 'chip-red' },
-    negative_question:     { label: '? Pregunta negativa', cls: 'chip-orange' },
+    negative_statement:    { label: '✗ Forma negativa',     cls: 'chip-red'    },
+    negative_question:     { label: '? Pregunta negativa',  cls: 'chip-orange' },
   };
 
   const GRAMMAR_TIP = {
@@ -248,6 +303,14 @@
 
     $('quiz-progress-label').textContent = `${currentQIdx + 1} / ${total}`;
     $('quiz-progress-fill').style.width = `${((currentQIdx) / total) * 100}%`;
+
+    // Fresh GIF for each question
+    setGif('quiz-gif', 'quiz-gif-placeholder', 'quiz-gif-emoji', currentVerb.key);
+
+    // Reset correct-answer GIF
+    const correctGif = $('quiz-correct-gif');
+    correctGif.hidden = true;
+    correctGif.src = '';
 
     // Type chip
     const chipInfo = TYPE_CHIP[q.type];
@@ -295,11 +358,12 @@
     allBtns.forEach(b => b.disabled = true);
 
     const correct = chosen === q.correct_answer;
+
     if (correct) {
       btn.classList.add('correct');
       currentQuizCorrect++;
-      // Show correct answer in scaffold
       $('quiz-scaffold').innerHTML = renderAnswered(q.scaffold, q.correct_answer, true);
+      showFeedbackGif(Giphy.getCelebrationGif());
     } else {
       btn.classList.add('wrong');
       quizWrong.push(q);
@@ -307,6 +371,7 @@
         if (b.textContent === q.correct_answer) b.classList.add('correct');
       });
       $('quiz-scaffold').innerHTML = renderAnswered(q.scaffold, q.correct_answer, false);
+      showFeedbackGif(Giphy.getWrongGif());
     }
 
     const fb = $('quiz-feedback');
@@ -315,7 +380,6 @@
     $('quiz-rationale').textContent = q.rationale;
     fb.classList.remove('hidden');
 
-    // Animate options
     btn.classList.add(correct ? 'bounce-in' : 'shake');
   }
 
@@ -324,7 +388,6 @@
     let result = scaffold;
     parts.forEach((p, i) => {
       const placeholder = `{{ans_${i + 1}}}`;
-      const cls = correct ? 'blank' : 'blank';
       const style = correct
         ? 'style="color:var(--success);border-color:var(--success)"'
         : 'style="color:var(--danger);border-color:var(--danger)"';
@@ -343,27 +406,23 @@
   });
 
   function finishQuiz() {
-    // Save progress
     if (!state.verbsSeen.includes(currentVerb.key)) {
       state.verbsSeen.push(currentVerb.key);
     }
     if (currentQuizCorrect >= 3 && !state.verbsMastered.includes(currentVerb.key)) {
       state.verbsMastered.push(currentVerb.key);
     }
-    // Record wrong answers
     quizWrong.forEach(q => {
       const already = state.wrongAnswers.find(w => w.verbKey === currentVerb.key && w.qNum === q.question_number);
       if (!already) state.wrongAnswers.push({ verbKey: currentVerb.key, qNum: q.question_number });
     });
 
-    // Advance verb index
     const currentIdx = verbos.findIndex(v => v.key === currentVerb.key);
     if (currentIdx >= state.verbIndex) {
       state.verbIndex = Math.min(currentIdx + 1, verbos.length - 1);
     }
     Storage.save(state);
 
-    // Check challenge trigger
     if (state.verbsSeen.length > 0 && state.verbsSeen.length % CHALLENGE_EVERY === 0
       && state.verbsSeen.length / CHALLENGE_EVERY > state.challengesDone) {
       showSummaryThenChallenge();
@@ -421,7 +480,6 @@
     challengeStreak = 0;
     challengeSeconds = 60;
 
-    // Build pool from all seen verbs
     challengePool = [];
     state.verbsSeen.forEach(key => {
       const qs = questionsMap[key];
@@ -536,7 +594,14 @@
     showView('verb-list');
   });
 
+  $('btn-show-kb').addEventListener('click', () => showView('kb'));
+
   // --- Init ---
+  // Purge old single-URL gif cache entries (gif_ prefix) from previous version
+  Object.keys(localStorage)
+    .filter(k => k.startsWith('gif_'))
+    .forEach(k => localStorage.removeItem(k));
+
   applyTheme();
   renderHome();
 })();

@@ -41,6 +41,7 @@
     </div>
     <div class="verb-list-toggle">
       <button class="btn-ghost" id="btn-show-list">Ver todos los verbos</button>
+      <button class="btn-ghost" id="btn-show-kb">📚 Notas de clase</button>
     </div>
   </div>
 
@@ -93,13 +94,16 @@
       <div class="flashcard" id="flashcard">
         <div class="flashcard-front">
           <div class="fc-label">verbo en inglés</div>
-          <div class="fc-base-form" id="fc-base"></div>
+          <div class="fc-base-row">
+            <div class="fc-base-form" id="fc-base"></div>
+            <button class="speak-btn" id="btn-speak-base" aria-label="Escuchar pronunciación">🔊</button>
+          </div>
           <div class="fc-meaning" id="fc-meaning"></div>
           <div class="fc-tap-hint">Toca para ver el pasado &#8595;</div>
         </div>
         <div class="flashcard-back">
           <div class="fc-label">pasado simple</div>
-          <div class="fc-past-form" id="fc-past"></div>
+          <div id="fc-past-row" class="fc-past-row"></div>
           <div id="fc-grammar-rules" class="fc-grammar-rules"></div>
           <div class="fc-gif-wrap">
             <img id="fc-gif" class="fc-gif" alt="" src="" hidden>
@@ -135,6 +139,7 @@
     <div id="quiz-feedback" class="quiz-feedback hidden">
       <div id="quiz-feedback-icon" class="feedback-icon"></div>
       <div id="quiz-feedback-text" class="feedback-text"></div>
+      <img id="quiz-correct-gif" class="quiz-correct-gif" alt="¡Correcto!" src="" hidden>
       <div id="quiz-rationale" class="quiz-rationale"></div>
       <button class="btn-primary" id="btn-next-question">Siguiente &#8594;</button>
     </div>
@@ -198,6 +203,246 @@
       <button class="btn-ghost" id="btn-home-from-summary">Ir al inicio</button>
     </div>
   </div>
+
+  <!-- ===== KNOWLEDGE BASE ===== -->
+  <div id="view-kb" class="view">
+    <div class="view-header">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <h2>📚 Notas de clase</h2>
+    </div>
+    <div class="kb-content">
+
+      <!-- 1. was / were -->
+      <details class="kb-section" open>
+        <summary>
+          <span>📘 <strong>was / were</strong></span>
+          <span class="quiz-type-chip chip-blue" style="margin:0">U11</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>Sujeto</th><th>✅ Afirmativo</th><th>❌ Negativo</th></tr></thead>
+            <tbody>
+              <tr><td>I</td><td class="kb-ok">was</td><td class="kb-err">wasn't</td></tr>
+              <tr><td>he / she / it</td><td class="kb-ok">was</td><td class="kb-err">wasn't</td></tr>
+              <tr><td>you / we / they</td><td class="kb-ok">were</td><td class="kb-err">weren't</td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule">
+            <strong>Pregunta yes/no:</strong> <em>Was</em> she home? → Yes, she <em>was</em>. / No, she <em>wasn't</em>.<br>
+            <em>Were</em> they noisy? → Yes, they <em>were</em>. / No, they <em>weren't</em>.
+          </div>
+          <div class="kb-rule">
+            <strong>Pregunta de información:</strong><br>
+            <em>What color <strong>were</strong></em> the walls? → They were orange.<br>
+            <em>How old <strong>was</strong></em> he? → He was eight.<br>
+            <em>Where <strong>were</strong></em> you? → I was at home.
+          </div>
+          <div class="kb-rule">
+            ⚠️ Con adjetivos en pasado: <em><span class="kb-ok">He <strong>was</strong> cute.</span></em> ✅
+            &nbsp; <em><span class="kb-err">He cute.</span></em> ❌
+          </div>
+          <div class="kb-rule kb-examples">
+            <strong>Del libro:</strong><br>
+            • <em>I was eight. It was exciting!</em><br>
+            • <em>The walls were orange.</em><br>
+            • <em>My parents weren't there.</em><br>
+            • <em>It wasn't old.</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. Colores -->
+      <details class="kb-section">
+        <summary>
+          <span>🎨 <strong>Colores</strong></span>
+          <span class="quiz-type-chip chip-purple" style="margin:0">U11.2</span>
+        </summary>
+        <div class="kb-body">
+          <div class="color-grid">
+            <div class="color-swatch" style="background:#fff;color:#000;border:1px solid #ccc">white<br><small>blanco</small></div>
+            <div class="color-swatch" style="background:#1a1a1a;color:#fff">black<br><small>negro</small></div>
+            <div class="color-swatch" style="background:#9ca3af;color:#000">gray<br><small>gris</small></div>
+            <div class="color-swatch" style="background:#3b82f6;color:#fff">blue<br><small>azul</small></div>
+            <div class="color-swatch" style="background:#ef4444;color:#fff">red<br><small>rojo</small></div>
+            <div class="color-swatch" style="background:#22c55e;color:#fff">green<br><small>verde</small></div>
+            <div class="color-swatch" style="background:#eab308;color:#000">yellow<br><small>amarillo</small></div>
+            <div class="color-swatch" style="background:#f97316;color:#fff">orange<br><small>naranja</small></div>
+            <div class="color-swatch" style="background:#a855f7;color:#fff">purple<br><small>morado</small></div>
+            <div class="color-swatch" style="background:#ec4899;color:#fff">pink<br><small>rosado</small></div>
+            <div class="color-swatch" style="background:#92400e;color:#fff">brown<br><small>café</small></div>
+          </div>
+          <div class="kb-rule kb-examples">
+            <strong>Del diálogo:</strong><br>
+            • <em>The couch was <strong>brown</strong>.</em><br>
+            • <em>The walls were <strong>orange</strong>.</em><br>
+            • <em>My bedroom walls were <strong>pink</strong> and <strong>green</strong>.</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. Adjetivos -->
+      <details class="kb-section">
+        <summary>
+          <span>✨ <strong>Adjetivos descriptivos</strong></span>
+          <span class="quiz-type-chip chip-purple" style="margin:0">U11.1</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>English</th><th>Español</th><th>English</th><th>Español</th></tr></thead>
+            <tbody>
+              <tr><td><strong>new</strong></td><td>nuevo/a</td><td><strong>old</strong></td><td>viejo/a</td></tr>
+              <tr><td><strong>cute</strong></td><td>lindo/a</td><td><strong>beautiful</strong></td><td>hermoso/a</td></tr>
+              <tr><td><strong>wonderful</strong></td><td>maravilloso/a</td><td><strong>awful</strong></td><td>horrible</td></tr>
+              <tr><td><strong>noisy</strong></td><td>ruidoso/a</td><td><strong>quiet</strong></td><td>tranquilo/a</td></tr>
+              <tr><td><strong>fast</strong></td><td>rápido/a</td><td><strong>slow</strong></td><td>lento/a</td></tr>
+              <tr><td><strong>exciting</strong></td><td>emocionante</td><td><strong>boring</strong></td><td>aburrido/a</td></tr>
+              <tr><td><strong>friendly</strong></td><td>amigable</td><td><strong>big</strong></td><td>grande</td></tr>
+              <tr><td><strong>small</strong></td><td>pequeño/a</td><td><strong>smart</strong></td><td>inteligente</td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule kb-examples">
+            <strong>Del libro (Mason Clark):</strong><br>
+            • <em>The go-kart was <strong>slow</strong>, but to me it was <strong>fast</strong>!</em><br>
+            • <em>The yard was <strong>beautiful</strong> and usually <strong>quiet</strong>.</em><br>
+            • <em>We were <strong>noisy</strong> kids!</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 4. Incertidumbre -->
+      <details class="kb-section">
+        <summary>
+          <span>🤔 <strong>Expresar incertidumbre</strong></span>
+          <span class="quiz-type-chip chip-orange" style="margin:0">U11.3</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>Expresión</th><th>Español</th><th>Nivel</th></tr></thead>
+            <tbody>
+              <tr><td><strong>I have no idea.</strong></td><td>No tengo ni idea.</td><td>😵 Muy inseguro</td></tr>
+              <tr><td><strong>I'm not sure.</strong></td><td>No estoy seguro/a.</td><td>😕 Inseguro</td></tr>
+              <tr><td><strong>I don't know.</strong></td><td>No sé.</td><td>😕 Inseguro</td></tr>
+              <tr><td><strong>I think…</strong></td><td>Creo que…</td><td>🤔 Leve</td></tr>
+              <tr><td><strong>Maybe…</strong></td><td>Quizás…</td><td>🤔 Leve</td></tr>
+              <tr><td><strong>Let me think…</strong></td><td>Déjame pensar…</td><td>⏳ Ganar tiempo</td></tr>
+              <tr><td><strong>Um… / Uh…</strong></td><td>Mmm… / Eh…</td><td>⏳ Ganar tiempo</td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule">
+            💡 <strong>Oh, yeah!</strong> = cuando recuerdas algo de repente<br>
+            <em>"Where was the phone? <strong>Oh, yeah!</strong> It was at my grandmother's house."</em>
+          </div>
+          <div class="kb-rule kb-examples">
+            <strong>Del diálogo (Titanic):</strong><br>
+            • A: <em>Who was the actress?</em> B: <em><strong>I have no idea.</strong></em><br>
+            • <em>Her name is Kate, <strong>I think</strong>.</em><br>
+            • <em><strong>Maybe</strong> it's Kate Hudson? No, she's American.</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5. Pasado simple -->
+      <details class="kb-section">
+        <summary>
+          <span>⏰ <strong>Pasado simple</strong></span>
+          <span class="quiz-type-chip chip-red" style="margin:0">U12</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>Infinitivo</th><th>Pasado</th><th>Infinitivo</th><th>Pasado</th></tr></thead>
+            <tbody>
+              <tr><td>eat</td><td class="kb-accent">ate</td><td>drink</td><td class="kb-accent">drank</td></tr>
+              <tr><td>have</td><td class="kb-accent">had</td><td>go</td><td class="kb-accent">went</td></tr>
+              <tr><td>take</td><td class="kb-accent">took</td><td>buy</td><td class="kb-accent">bought</td></tr>
+              <tr><td>make</td><td class="kb-accent">made</td><td>see</td><td class="kb-accent">saw</td></tr>
+              <tr><td>know</td><td class="kb-accent">knew</td><td>think</td><td class="kb-accent">thought</td></tr>
+              <tr><td>get</td><td class="kb-accent">got</td><td>come</td><td class="kb-accent">came</td></tr>
+              <tr><td>give</td><td class="kb-accent">gave</td><td>find</td><td class="kb-accent">found</td></tr>
+              <tr><td>say</td><td class="kb-accent">said</td><td>tell</td><td class="kb-accent">told</td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule">
+            <strong>Negativo:</strong> <em>didn't + verbo BASE</em><br>
+            ✅ <span class="kb-ok">She didn't <strong>eat</strong>.</span> &nbsp;
+            ❌ <span class="kb-err">She didn't <strong>ate</strong>.</span><br><br>
+            <strong>Pregunta:</strong> <em>Did + sujeto + verbo BASE?</em><br>
+            ✅ <span class="kb-ok">Did she <strong>drink</strong> juice?</span> → Yes, she did. / No, she didn't.
+          </div>
+          <div class="kb-rule kb-examples">
+            <strong>Del blog de Tyler:</strong><br>
+            • <em>I <strong>took</strong> the bus from Aracaju.</em><br>
+            • <em>I <strong>ate</strong> crackers and a banana.</em><br>
+            • <em>I <strong>went</strong> to a food stand and <strong>bought</strong> a sandwich.</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 6. some / any -->
+      <details class="kb-section">
+        <summary>
+          <span>🍽️ <strong>some / any</strong></span>
+          <span class="quiz-type-chip chip-blue" style="margin:0">U12.2</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>Contexto</th><th>Usa</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr><td>✅ Afirmativo</td><td class="kb-ok"><strong>some</strong></td><td><em>I had <strong>some</strong> soup.</em></td></tr>
+              <tr><td>❌ Negativo</td><td class="kb-accent"><strong>any</strong></td><td><em>I didn't have <strong>any</strong> juice.</em></td></tr>
+              <tr><td>❓ Pregunta</td><td class="kb-accent"><strong>any</strong></td><td><em>Did you have <strong>any</strong> dessert?</em></td></tr>
+              <tr><td>🙏 Pedido / oferta</td><td class="kb-ok"><strong>some</strong></td><td><em>Can I have <strong>some</strong> bread?</em></td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule">
+            ⚠️ En pedidos y ofertas → siempre <strong>some</strong>:<br>
+            ✅ <span class="kb-ok">Can I have <strong>some</strong> bread?</span><br>
+            ❌ <span class="kb-err">Can I have <strong>any</strong> bread?</span>
+          </div>
+          <div class="kb-rule kb-examples">
+            <strong>Del restaurante:</strong><br>
+            • <em>Did you have <strong>any</strong> vegetables? — No, I didn't have <strong>any</strong>.</em><br>
+            • <em>Would you like <strong>some</strong> potatoes?</em><br>
+            • <em>There wasn't <strong>any</strong> meat on the menu.</em>
+          </div>
+        </div>
+      </details>
+
+      <!-- 7. Vocabulario comida -->
+      <details class="kb-section">
+        <summary>
+          <span>🥗 <strong>Comida y restaurante</strong></span>
+          <span class="quiz-type-chip chip-orange" style="margin:0">U12</span>
+        </summary>
+        <div class="kb-body">
+          <table class="kb-table">
+            <thead><tr><th>English</th><th>Español</th><th>English</th><th>Español</th></tr></thead>
+            <tbody>
+              <tr><td>soup</td><td>sopa</td><td>bread</td><td>pan</td></tr>
+              <tr><td>sandwich</td><td>sándwich</td><td>crackers</td><td>galletas de sal</td></tr>
+              <tr><td>chicken</td><td>pollo</td><td>steak</td><td>bistec</td></tr>
+              <tr><td>fish</td><td>pescado</td><td>beef</td><td>res</td></tr>
+              <tr><td>rice</td><td>arroz</td><td>potatoes</td><td>papas</td></tr>
+              <tr><td>vegetables</td><td>verduras</td><td>green beans</td><td>habichuelas</td></tr>
+              <tr><td>ice cream</td><td>helado</td><td>dessert</td><td>postre</td></tr>
+              <tr><td>juice</td><td>jugo</td><td>water</td><td>agua</td></tr>
+              <tr><td>soda</td><td>gaseosa</td><td>coffee</td><td>café</td></tr>
+            </tbody>
+          </table>
+          <div class="kb-rule">
+            <strong>En el restaurante:</strong><br>
+            • <em>What would you <strong>like</strong> to eat?</em><br>
+            • <em>I'd <strong>like</strong> the chicken and rice, please.</em><br>
+            • <em>Can I have <strong>some</strong> water?</em> — <em>Of <strong>course</strong>. Here you <strong>are</strong>.</em>
+          </div>
+          <div class="kb-rule">
+            <strong>server</strong> = mesero/a (término neutro y moderno)<br>
+            waiter (hombre) / waitress (mujer) → uso más antiguo
+          </div>
+        </div>
+      </details>
+
+    </div><!-- /kb-content -->
+  </div><!-- /view-kb -->
 
   <script src="js/storage.js"></script>
   <script src="js/giphy.js"></script>

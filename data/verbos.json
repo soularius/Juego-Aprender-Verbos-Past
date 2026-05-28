@@ -735,5 +735,49 @@
       "neg": "She didn't write the report.",
       "q": "Did he write the email?"
     }
+  },
+  {
+    "key": "colors_past",
+    "base_form": "colors",
+    "simple_past": "was/were + color",
+    "meaning_es": "colores en el pasado",
+    "grammar_rules": {
+      "aff": "The walls were orange.",
+      "neg": "The phone wasn't white.",
+      "q": "What color was the phone?"
+    }
+  },
+  {
+    "key": "adjectives_past",
+    "base_form": "adjectives",
+    "simple_past": "was/were + adjective",
+    "meaning_es": "adjetivos descriptivos en el pasado",
+    "grammar_rules": {
+      "aff": "The go-kart was fast.",
+      "neg": "The farm wasn't big.",
+      "q": "Was the vacation exciting?"
+    }
+  },
+  {
+    "key": "uncertainty",
+    "base_form": "uncertainty",
+    "simple_past": "I have no idea / I'm not sure",
+    "meaning_es": "expresar incertidumbre",
+    "grammar_rules": {
+      "aff": "Her name is Kate, I think.",
+      "neg": "I'm not sure. / I don't know.",
+      "q": "Maybe it was Kate Hudson?"
+    }
+  },
+  {
+    "key": "some_any",
+    "base_form": "some / any",
+    "simple_past": "some (afirm.) / any (neg./preg.)",
+    "meaning_es": "algo / algún / ningún",
+    "grammar_rules": {
+      "aff": "I had some soup.",
+      "neg": "I didn't have any juice.",
+      "q": "Did you have any dessert?"
+    }
   }
 ]

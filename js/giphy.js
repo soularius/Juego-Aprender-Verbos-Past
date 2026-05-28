@@ -1,5 +1,10 @@
 const Giphy = (() => {
+  // v2 cache key — breaks old single-URL entries forcing fresh fetches
+  const CACHE_KEY = k => `gif2_${k}`;
   const CACHE_TTL = 7 * 24 * 60 * 60 * 1000;
+
+  // Per-verb sequential index (in-memory, never repeats until full cycle)
+  const _idx = {};
 
   const VERB_EMOJIS = {
     be:'🧍', become:'🦋', begin:'🚀', break:'💥', bring:'🎁',
@@ -16,37 +21,68 @@ const Giphy = (() => {
     stand:'🧍', swim:'🏊', take:'🤚', teach:'👩‍🏫', tell:'📢',
     think:'🤔', throw:'🥏', understand:'💡', wake:'⏰',
     wear:'👗', win:'🏆', write:'✍️',
+    colors_past:'🎨', adjectives_past:'✨', uncertainty:'🤔', some_any:'🍽️',
+    celebrate:'🎉', oops:'😬',
   };
 
   async function getGif(verbKey) {
-    const cacheKey = `gif_${verbKey}`;
+    const cacheKey = CACHE_KEY(verbKey);
+    let urls = null;
+
     try {
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        const { url, expires } = JSON.parse(cached);
-        if (Date.now() < expires) return url;
+      const raw = localStorage.getItem(cacheKey);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        // Only use new format (array); ignore any old single-url entries
+        if (parsed.urls && parsed.urls.length > 0 && Date.now() < parsed.expires) {
+          urls = parsed.urls;
+        }
       }
     } catch { /* ignore */ }
 
-    const settings = Storage.loadSettings();
-    const apiKey = settings.giphyKey || 'HfTleooj70xS5MgVIseVSBfMkQjFoDdt';
+    if (!urls) {
+      const settings = Storage.loadSettings();
+      const apiKey = settings.giphyKey || 'HfTleooj70xS5MgVIseVSBfMkQjFoDdt';
+      try {
+        const res = await fetch(
+          `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${encodeURIComponent(verbKey)}&limit=10&rating=g&lang=en`
+        );
+        if (!res.ok) return null;
+        const data = await res.json();
+        const gifs = data.data || [];
+        if (gifs.length === 0) return null;
 
-    try {
-      const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${encodeURIComponent(verbKey)}&limit=8&rating=g&lang=en`;
-      const res = await fetch(url);
-      if (!res.ok) return null;
-      const data = await res.json();
-      const gifs = data.data;
-      if (!gifs || gifs.length === 0) return null;
-      const pick = gifs[Math.floor(Math.random() * Math.min(gifs.length, 5))];
-      const gifUrl = pick?.images?.fixed_height?.url || pick?.images?.original?.url || null;
-      if (gifUrl) {
-        localStorage.setItem(cacheKey, JSON.stringify({ url: gifUrl, expires: Date.now() + CACHE_TTL }));
+        urls = gifs
+          .map(g => g?.images?.fixed_height?.url || g?.images?.original?.url)
+          .filter(Boolean)
+          .slice(0, 10);
+
+        if (urls.length === 0) return null;
+        localStorage.setItem(cacheKey, JSON.stringify({ urls, expires: Date.now() + CACHE_TTL }));
+      } catch {
+        return null;
       }
-      return gifUrl;
-    } catch {
-      return null;
     }
+
+    // Sequential — guarantees a different URL every call until the array wraps
+    const i = (_idx[verbKey] ?? 0) % urls.length;
+    _idx[verbKey] = i + 1;
+    return urls[i];
+  }
+
+  // Dedicated celebration GIF for correct-answer feedback
+  function getCelebrationGif() {
+    return getGif('celebrate');
+  }
+
+  // Dedicated oops GIF for wrong-answer feedback
+  function getWrongGif() {
+    return getGif('oops');
+  }
+
+  // Reset the sequential counter for a verb (call when starting a new verb)
+  function resetIndex(verbKey) {
+    delete _idx[verbKey];
   }
 
   function getEmoji(verbKey) {
@@ -55,9 +91,10 @@ const Giphy = (() => {
 
   function clearCache() {
     Object.keys(localStorage)
-      .filter(k => k.startsWith('gif_'))
+      .filter(k => k.startsWith('gif_') || k.startsWith('gif2_'))
       .forEach(k => localStorage.removeItem(k));
+    Object.keys(_idx).forEach(k => delete _idx[k]);
   }
 
-  return { getGif, getEmoji, clearCache };
+  return { getGif, getCelebrationGif, getWrongGif, resetIndex, getEmoji, clearCache };
 })();
