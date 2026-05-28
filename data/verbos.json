@@ -1,69 +1,739 @@
 [
-  { "key": "be", "base_form": "be", "simple_past": "was/were", "meaning_es": "ser o estar" },
-  { "key": "become", "base_form": "become", "simple_past": "became", "meaning_es": "convertirse en / llegar a ser" },
-  { "key": "begin", "base_form": "begin", "simple_past": "began", "meaning_es": "empezar / comenzar" },
-  { "key": "break", "base_form": "break", "simple_past": "broke", "meaning_es": "romper" },
-  { "key": "bring", "base_form": "bring", "simple_past": "brought", "meaning_es": "traer" },
-  { "key": "build", "base_form": "build", "simple_past": "built", "meaning_es": "construir" },
-  { "key": "buy", "base_form": "buy", "simple_past": "bought", "meaning_es": "comprar" },
-  { "key": "can", "base_form": "can", "simple_past": "could", "meaning_es": "poder" },
-  { "key": "catch", "base_form": "catch", "simple_past": "caught", "meaning_es": "atrapar / coger" },
-  { "key": "choose", "base_form": "choose", "simple_past": "chose", "meaning_es": "elegir / escoger" },
-  { "key": "come", "base_form": "come", "simple_past": "came", "meaning_es": "venir" },
-  { "key": "cost", "base_form": "cost", "simple_past": "cost", "meaning_es": "costar" },
-  { "key": "cut", "base_form": "cut", "simple_past": "cut", "meaning_es": "cortar" },
-  { "key": "do", "base_form": "do", "simple_past": "did", "meaning_es": "hacer" },
-  { "key": "draw", "base_form": "draw", "simple_past": "drew", "meaning_es": "extender / dibujar" },
-  { "key": "drink", "base_form": "drink", "simple_past": "drank", "meaning_es": "beber / tomar" },
-  { "key": "drive", "base_form": "drive", "simple_past": "drove", "meaning_es": "conducir / manejar" },
-  { "key": "eat", "base_form": "eat", "simple_past": "ate", "meaning_es": "comer" },
-  { "key": "fall", "base_form": "fall", "simple_past": "fell", "meaning_es": "caer" },
-  { "key": "feel", "base_form": "feel", "simple_past": "felt", "meaning_es": "sentir" },
-  { "key": "find", "base_form": "find", "simple_past": "found", "meaning_es": "encontrar" },
-  { "key": "fly", "base_form": "fly", "simple_past": "flew", "meaning_es": "volar" },
-  { "key": "forget", "base_form": "forget", "simple_past": "forgot", "meaning_es": "olvidar" },
-  { "key": "get", "base_form": "get", "simple_past": "got", "meaning_es": "obtener / conseguir / recibir" },
-  { "key": "give", "base_form": "give", "simple_past": "gave", "meaning_es": "dar" },
-  { "key": "go", "base_form": "go", "simple_past": "went", "meaning_es": "ir" },
-  { "key": "grow", "base_form": "grow", "simple_past": "grew", "meaning_es": "crecer" },
-  { "key": "have", "base_form": "have", "simple_past": "had", "meaning_es": "tener / haber" },
-  { "key": "hear", "base_form": "hear", "simple_past": "heard", "meaning_es": "oír" },
-  { "key": "hit", "base_form": "hit", "simple_past": "hit", "meaning_es": "golpear" },
-  { "key": "keep", "base_form": "keep", "simple_past": "kept", "meaning_es": "guardar / mantener" },
-  { "key": "know", "base_form": "know", "simple_past": "knew", "meaning_es": "saber / conocer" },
-  { "key": "leave", "base_form": "leave", "simple_past": "left", "meaning_es": "dejar / salir / irse" },
-  { "key": "lend", "base_form": "lend", "simple_past": "lent", "meaning_es": "prestar" },
-  { "key": "lie", "base_form": "lie", "simple_past": "lay", "meaning_es": "tumbarse / recostarse" },
-  { "key": "lose", "base_form": "lose", "simple_past": "lost", "meaning_es": "perder" },
-  { "key": "make", "base_form": "make", "simple_past": "made", "meaning_es": "hacer / fabricar" },
-  { "key": "mean", "base_form": "mean", "simple_past": "meant", "meaning_es": "significar / querer decir" },
-  { "key": "meet", "base_form": "meet", "simple_past": "met", "meaning_es": "conocer a alguien / encontrarse con" },
-  { "key": "pay", "base_form": "pay", "simple_past": "paid", "meaning_es": "pagar" },
-  { "key": "put", "base_form": "put", "simple_past": "put", "meaning_es": "poner / colocar" },
-  { "key": "read", "base_form": "read", "simple_past": "read", "meaning_es": "leer" },
-  { "key": "ride", "base_form": "ride", "simple_past": "rode", "meaning_es": "montar (bici, caballo, etc.) / andar en" },
-  { "key": "ring", "base_form": "ring", "simple_past": "rang", "meaning_es": "sonar / llamar por teléfono" },
-  { "key": "run", "base_form": "run", "simple_past": "ran", "meaning_es": "correr" },
-  { "key": "say", "base_form": "say", "simple_past": "said", "meaning_es": "decir" },
-  { "key": "see", "base_form": "see", "simple_past": "saw", "meaning_es": "ver" },
-  { "key": "sell", "base_form": "sell", "simple_past": "sold", "meaning_es": "vender" },
-  { "key": "send", "base_form": "send", "simple_past": "sent", "meaning_es": "enviar" },
-  { "key": "show", "base_form": "show", "simple_past": "showed", "meaning_es": "mostrar / enseñar" },
-  { "key": "sing", "base_form": "sing", "simple_past": "sang", "meaning_es": "cantar" },
-  { "key": "sit", "base_form": "sit", "simple_past": "sat", "meaning_es": "sentarse" },
-  { "key": "sleep", "base_form": "sleep", "simple_past": "slept", "meaning_es": "dormir" },
-  { "key": "speak", "base_form": "speak", "simple_past": "spoke", "meaning_es": "hablar" },
-  { "key": "spend", "base_form": "spend", "simple_past": "spent", "meaning_es": "gastar (dinero) / pasar (tiempo)" },
-  { "key": "stand", "base_form": "stand", "simple_past": "stood", "meaning_es": "estar de pie / pararse" },
-  { "key": "swim", "base_form": "swim", "simple_past": "swam", "meaning_es": "nadar" },
-  { "key": "take", "base_form": "take", "simple_past": "took", "meaning_es": "tomar / llevar" },
-  { "key": "teach", "base_form": "teach", "simple_past": "taught", "meaning_es": "enseñar" },
-  { "key": "tell", "base_form": "tell", "simple_past": "told", "meaning_es": "decir / contar / relatar" },
-  { "key": "think", "base_form": "think", "simple_past": "thought", "meaning_es": "pensar" },
-  { "key": "throw", "base_form": "throw", "simple_past": "threw", "meaning_es": "lanzar / tirar" },
-  { "key": "understand", "base_form": "understand", "simple_past": "understood", "meaning_es": "entender / comprender" },
-  { "key": "wake", "base_form": "wake", "simple_past": "woke", "meaning_es": "despertar / despertarse" },
-  { "key": "wear", "base_form": "wear", "simple_past": "wore", "meaning_es": "llevar puesto / vestir" },
-  { "key": "win", "base_form": "win", "simple_past": "won", "meaning_es": "ganar" },
-  { "key": "write", "base_form": "write", "simple_past": "wrote", "meaning_es": "escribir" }
+  {
+    "key": "be",
+    "base_form": "be",
+    "simple_past": "was/were",
+    "meaning_es": "ser o estar",
+    "grammar_rules": {
+      "aff": "I was / They were tired.",
+      "neg": "I wasn't / They weren't ready.",
+      "q": "Was she / Were they at home?"
+    }
+  },
+  {
+    "key": "become",
+    "base_form": "become",
+    "simple_past": "became",
+    "meaning_es": "convertirse en / llegar a ser",
+    "grammar_rules": {
+      "aff": "She became a doctor.",
+      "neg": "She didn't become a nurse.",
+      "q": "Did she become a teacher?"
+    }
+  },
+  {
+    "key": "begin",
+    "base_form": "begin",
+    "simple_past": "began",
+    "meaning_es": "empezar / comenzar",
+    "grammar_rules": {
+      "aff": "The movie began late.",
+      "neg": "The concert didn't begin on time.",
+      "q": "Did the class begin at 9?"
+    }
+  },
+  {
+    "key": "break",
+    "base_form": "break",
+    "simple_past": "broke",
+    "meaning_es": "romper",
+    "grammar_rules": {
+      "aff": "He broke the window.",
+      "neg": "He didn't break the rules.",
+      "q": "Did she break her arm?"
+    }
+  },
+  {
+    "key": "bring",
+    "base_form": "bring",
+    "simple_past": "brought",
+    "meaning_es": "traer",
+    "grammar_rules": {
+      "aff": "She brought her umbrella.",
+      "neg": "She didn't bring her phone.",
+      "q": "Did they bring food?"
+    }
+  },
+  {
+    "key": "build",
+    "base_form": "build",
+    "simple_past": "built",
+    "meaning_es": "construir",
+    "grammar_rules": {
+      "aff": "They built a new house.",
+      "neg": "They didn't build the fence.",
+      "q": "Did he build the shed?"
+    }
+  },
+  {
+    "key": "buy",
+    "base_form": "buy",
+    "simple_past": "bought",
+    "meaning_es": "comprar",
+    "grammar_rules": {
+      "aff": "She bought a new laptop.",
+      "neg": "She didn't buy the expensive one.",
+      "q": "Did you buy tickets?"
+    }
+  },
+  {
+    "key": "can",
+    "base_form": "can",
+    "simple_past": "could",
+    "meaning_es": "poder",
+    "grammar_rules": {
+      "aff": "She could swim at age five.",
+      "neg": "She couldn't ride a bike.",
+      "q": "Couldn't he finish in time?"
+    }
+  },
+  {
+    "key": "catch",
+    "base_form": "catch",
+    "simple_past": "caught",
+    "meaning_es": "atrapar / coger",
+    "grammar_rules": {
+      "aff": "He caught the ball.",
+      "neg": "He didn't catch the bus.",
+      "q": "Did they catch a fish?"
+    }
+  },
+  {
+    "key": "choose",
+    "base_form": "choose",
+    "simple_past": "chose",
+    "meaning_es": "elegir / escoger",
+    "grammar_rules": {
+      "aff": "She chose the blue dress.",
+      "neg": "She didn't choose the expensive option.",
+      "q": "Did you choose a topic?"
+    }
+  },
+  {
+    "key": "come",
+    "base_form": "come",
+    "simple_past": "came",
+    "meaning_es": "venir",
+    "grammar_rules": {
+      "aff": "She came home late.",
+      "neg": "She didn't come to the party.",
+      "q": "Did he come to the meeting?"
+    }
+  },
+  {
+    "key": "cost",
+    "base_form": "cost",
+    "simple_past": "cost",
+    "meaning_es": "costar",
+    "grammar_rules": {
+      "aff": "The car cost a lot.",
+      "neg": "The dinner didn't cost much.",
+      "q": "Did it cost more than $50?"
+    }
+  },
+  {
+    "key": "cut",
+    "base_form": "cut",
+    "simple_past": "cut",
+    "meaning_es": "cortar",
+    "grammar_rules": {
+      "aff": "She cut her finger.",
+      "neg": "She didn't cut the cake yet.",
+      "q": "Did he cut the grass?"
+    }
+  },
+  {
+    "key": "do",
+    "base_form": "do",
+    "simple_past": "did",
+    "meaning_es": "hacer",
+    "grammar_rules": {
+      "aff": "She did her homework.",
+      "neg": "She didn't do the dishes.",
+      "q": "Did you do the assignment?"
+    }
+  },
+  {
+    "key": "draw",
+    "base_form": "draw",
+    "simple_past": "drew",
+    "meaning_es": "extender / dibujar",
+    "grammar_rules": {
+      "aff": "He drew a map.",
+      "neg": "He didn't draw the curtains.",
+      "q": "Did she draw the portrait?"
+    }
+  },
+  {
+    "key": "drink",
+    "base_form": "drink",
+    "simple_past": "drank",
+    "meaning_es": "beber / tomar",
+    "grammar_rules": {
+      "aff": "He drank too much coffee.",
+      "neg": "He didn't drink the juice.",
+      "q": "Did they drink water?"
+    }
+  },
+  {
+    "key": "drive",
+    "base_form": "drive",
+    "simple_past": "drove",
+    "meaning_es": "conducir / manejar",
+    "grammar_rules": {
+      "aff": "She drove to the airport.",
+      "neg": "She didn't drive home that night.",
+      "q": "Did he drive the new car?"
+    }
+  },
+  {
+    "key": "eat",
+    "base_form": "eat",
+    "simple_past": "ate",
+    "meaning_es": "comer",
+    "grammar_rules": {
+      "aff": "She ate breakfast early.",
+      "neg": "She didn't eat lunch today.",
+      "q": "Did they eat at the restaurant?"
+    }
+  },
+  {
+    "key": "fall",
+    "base_form": "fall",
+    "simple_past": "fell",
+    "meaning_es": "caer",
+    "grammar_rules": {
+      "aff": "She fell off her bike.",
+      "neg": "She didn't fall asleep early.",
+      "q": "Did he fall during the hike?"
+    }
+  },
+  {
+    "key": "feel",
+    "base_form": "feel",
+    "simple_past": "felt",
+    "meaning_es": "sentir",
+    "grammar_rules": {
+      "aff": "She felt sick after eating.",
+      "neg": "She didn't feel nervous.",
+      "q": "Did you feel cold?"
+    }
+  },
+  {
+    "key": "find",
+    "base_form": "find",
+    "simple_past": "found",
+    "meaning_es": "encontrar",
+    "grammar_rules": {
+      "aff": "She found her keys.",
+      "neg": "She didn't find the answer easily.",
+      "q": "Did he find a new job?"
+    }
+  },
+  {
+    "key": "fly",
+    "base_form": "fly",
+    "simple_past": "flew",
+    "meaning_es": "volar",
+    "grammar_rules": {
+      "aff": "She flew to Paris.",
+      "neg": "She didn't fly business class.",
+      "q": "Did they fly direct?"
+    }
+  },
+  {
+    "key": "forget",
+    "base_form": "forget",
+    "simple_past": "forgot",
+    "meaning_es": "olvidar",
+    "grammar_rules": {
+      "aff": "She forgot her password.",
+      "neg": "She didn't forget the anniversary.",
+      "q": "Did he forget to call?"
+    }
+  },
+  {
+    "key": "get",
+    "base_form": "get",
+    "simple_past": "got",
+    "meaning_es": "obtener / conseguir / recibir",
+    "grammar_rules": {
+      "aff": "She got a promotion.",
+      "neg": "She didn't get the job at first.",
+      "q": "Did you get my message?"
+    }
+  },
+  {
+    "key": "give",
+    "base_form": "give",
+    "simple_past": "gave",
+    "meaning_es": "dar",
+    "grammar_rules": {
+      "aff": "She gave a great speech.",
+      "neg": "She didn't give up.",
+      "q": "Did they give you homework?"
+    }
+  },
+  {
+    "key": "go",
+    "base_form": "go",
+    "simple_past": "went",
+    "meaning_es": "ir",
+    "grammar_rules": {
+      "aff": "She went to the cinema.",
+      "neg": "She didn't go to the gym.",
+      "q": "Did he go to the party?"
+    }
+  },
+  {
+    "key": "grow",
+    "base_form": "grow",
+    "simple_past": "grew",
+    "meaning_es": "crecer",
+    "grammar_rules": {
+      "aff": "She grew tomatoes.",
+      "neg": "She didn't grow up in the city.",
+      "q": "Did he grow a beard?"
+    }
+  },
+  {
+    "key": "have",
+    "base_form": "have",
+    "simple_past": "had",
+    "meaning_es": "tener / haber",
+    "grammar_rules": {
+      "aff": "She had a great time.",
+      "neg": "She didn't have breakfast.",
+      "q": "Did they have a meeting?"
+    }
+  },
+  {
+    "key": "hear",
+    "base_form": "hear",
+    "simple_past": "heard",
+    "meaning_es": "oír",
+    "grammar_rules": {
+      "aff": "She heard a strange noise.",
+      "neg": "She didn't hear the alarm.",
+      "q": "Did you hear the news?"
+    }
+  },
+  {
+    "key": "hit",
+    "base_form": "hit",
+    "simple_past": "hit",
+    "meaning_es": "golpear",
+    "grammar_rules": {
+      "aff": "She hit the target.",
+      "neg": "She didn't hit the ball hard.",
+      "q": "Did he hit a new record?"
+    }
+  },
+  {
+    "key": "keep",
+    "base_form": "keep",
+    "simple_past": "kept",
+    "meaning_es": "guardar / mantener",
+    "grammar_rules": {
+      "aff": "She kept a journal.",
+      "neg": "She didn't keep her promise.",
+      "q": "Did they keep the receipt?"
+    }
+  },
+  {
+    "key": "know",
+    "base_form": "know",
+    "simple_past": "knew",
+    "meaning_es": "saber / conocer",
+    "grammar_rules": {
+      "aff": "She knew the answer.",
+      "neg": "She didn't know the way.",
+      "q": "Did he know the truth?"
+    }
+  },
+  {
+    "key": "leave",
+    "base_form": "leave",
+    "simple_past": "left",
+    "meaning_es": "dejar / salir / irse",
+    "grammar_rules": {
+      "aff": "She left her phone at home.",
+      "neg": "She didn't leave early.",
+      "q": "Did they leave on time?"
+    }
+  },
+  {
+    "key": "lend",
+    "base_form": "lend",
+    "simple_past": "lent",
+    "meaning_es": "prestar",
+    "grammar_rules": {
+      "aff": "She lent her car to her brother.",
+      "neg": "She didn't lend money to anyone.",
+      "q": "Did he lend you an umbrella?"
+    }
+  },
+  {
+    "key": "lie",
+    "base_form": "lie",
+    "simple_past": "lay",
+    "meaning_es": "tumbarse / recostarse",
+    "grammar_rules": {
+      "aff": "The cat lay on the rug.",
+      "neg": "The cat didn't lie on the sofa.",
+      "q": "Did she lie on the beach?"
+    }
+  },
+  {
+    "key": "lose",
+    "base_form": "lose",
+    "simple_past": "lost",
+    "meaning_es": "perder",
+    "grammar_rules": {
+      "aff": "She lost her keys.",
+      "neg": "She didn't lose the match.",
+      "q": "Did they lose the game?"
+    }
+  },
+  {
+    "key": "make",
+    "base_form": "make",
+    "simple_past": "made",
+    "meaning_es": "hacer / fabricar",
+    "grammar_rules": {
+      "aff": "She made a cake.",
+      "neg": "She didn't make a mistake.",
+      "q": "Did he make the decision?"
+    }
+  },
+  {
+    "key": "mean",
+    "base_form": "mean",
+    "simple_past": "meant",
+    "meaning_es": "significar / querer decir",
+    "grammar_rules": {
+      "aff": "She meant to call.",
+      "neg": "She didn't mean to be rude.",
+      "q": "Did it mean a lot to her?"
+    }
+  },
+  {
+    "key": "meet",
+    "base_form": "meet",
+    "simple_past": "met",
+    "meaning_es": "conocer a alguien / encontrarse con",
+    "grammar_rules": {
+      "aff": "She met her husband at a cafe.",
+      "neg": "She didn't meet the deadline.",
+      "q": "Did you meet the new team?"
+    }
+  },
+  {
+    "key": "pay",
+    "base_form": "pay",
+    "simple_past": "paid",
+    "meaning_es": "pagar",
+    "grammar_rules": {
+      "aff": "She paid for dinner.",
+      "neg": "She didn't pay the full price.",
+      "q": "Did he pay in cash?"
+    }
+  },
+  {
+    "key": "put",
+    "base_form": "put",
+    "simple_past": "put",
+    "meaning_es": "poner / colocar",
+    "grammar_rules": {
+      "aff": "She put the keys on the table.",
+      "neg": "She didn't put the milk back.",
+      "q": "Did they put up the decorations?"
+    }
+  },
+  {
+    "key": "read",
+    "base_form": "read",
+    "simple_past": "read",
+    "meaning_es": "leer",
+    "grammar_rules": {
+      "aff": "She read the whole book.",
+      "neg": "She didn't read the instructions.",
+      "q": "Did you read the email?"
+    }
+  },
+  {
+    "key": "ride",
+    "base_form": "ride",
+    "simple_past": "rode",
+    "meaning_es": "montar (bici, caballo, etc.) / andar en",
+    "grammar_rules": {
+      "aff": "She rode her bike to work.",
+      "neg": "She didn't ride the subway.",
+      "q": "Did he ride a horse?"
+    }
+  },
+  {
+    "key": "ring",
+    "base_form": "ring",
+    "simple_past": "rang",
+    "meaning_es": "sonar / llamar por teléfono",
+    "grammar_rules": {
+      "aff": "The bell rang at noon.",
+      "neg": "The alarm didn't ring on time.",
+      "q": "Did your phone ring?"
+    }
+  },
+  {
+    "key": "run",
+    "base_form": "run",
+    "simple_past": "ran",
+    "meaning_es": "correr",
+    "grammar_rules": {
+      "aff": "She ran a marathon.",
+      "neg": "She didn't run this morning.",
+      "q": "Did they run out of time?"
+    }
+  },
+  {
+    "key": "say",
+    "base_form": "say",
+    "simple_past": "said",
+    "meaning_es": "decir",
+    "grammar_rules": {
+      "aff": "She said thank you.",
+      "neg": "She didn't say anything.",
+      "q": "Did he say goodbye?"
+    }
+  },
+  {
+    "key": "see",
+    "base_form": "see",
+    "simple_past": "saw",
+    "meaning_es": "ver",
+    "grammar_rules": {
+      "aff": "She saw a shooting star.",
+      "neg": "She didn't see the movie.",
+      "q": "Did you see the match?"
+    }
+  },
+  {
+    "key": "sell",
+    "base_form": "sell",
+    "simple_past": "sold",
+    "meaning_es": "vender",
+    "grammar_rules": {
+      "aff": "She sold her old car.",
+      "neg": "She didn't sell the house.",
+      "q": "Did they sell all the tickets?"
+    }
+  },
+  {
+    "key": "send",
+    "base_form": "send",
+    "simple_past": "sent",
+    "meaning_es": "enviar",
+    "grammar_rules": {
+      "aff": "She sent an email.",
+      "neg": "She didn't send the package.",
+      "q": "Did he send the report?"
+    }
+  },
+  {
+    "key": "show",
+    "base_form": "show",
+    "simple_past": "showed",
+    "meaning_es": "mostrar / enseñar",
+    "grammar_rules": {
+      "aff": "She showed us the photos.",
+      "neg": "She didn't show her ID.",
+      "q": "Did they show the film?"
+    }
+  },
+  {
+    "key": "sing",
+    "base_form": "sing",
+    "simple_past": "sang",
+    "meaning_es": "cantar",
+    "grammar_rules": {
+      "aff": "She sang at the talent show.",
+      "neg": "She didn't sing karaoke.",
+      "q": "Did he sing at the wedding?"
+    }
+  },
+  {
+    "key": "sit",
+    "base_form": "sit",
+    "simple_past": "sat",
+    "meaning_es": "sentarse",
+    "grammar_rules": {
+      "aff": "She sat in the front row.",
+      "neg": "She didn't sit next to him.",
+      "q": "Did they sit together?"
+    }
+  },
+  {
+    "key": "sleep",
+    "base_form": "sleep",
+    "simple_past": "slept",
+    "meaning_es": "dormir",
+    "grammar_rules": {
+      "aff": "She slept through her alarm.",
+      "neg": "She didn't sleep well.",
+      "q": "Did you sleep on the flight?"
+    }
+  },
+  {
+    "key": "speak",
+    "base_form": "speak",
+    "simple_past": "spoke",
+    "meaning_es": "hablar",
+    "grammar_rules": {
+      "aff": "She spoke to the manager.",
+      "neg": "She didn't speak at the meeting.",
+      "q": "Did he speak at the conference?"
+    }
+  },
+  {
+    "key": "spend",
+    "base_form": "spend",
+    "simple_past": "spent",
+    "meaning_es": "gastar (dinero) / pasar (tiempo)",
+    "grammar_rules": {
+      "aff": "She spent the weekend at the beach.",
+      "neg": "She didn't spend too much.",
+      "q": "Did they spend time together?"
+    }
+  },
+  {
+    "key": "stand",
+    "base_form": "stand",
+    "simple_past": "stood",
+    "meaning_es": "estar de pie / pararse",
+    "grammar_rules": {
+      "aff": "She stood in line for two hours.",
+      "neg": "She didn't stand up for herself.",
+      "q": "Did he stand on the podium?"
+    }
+  },
+  {
+    "key": "swim",
+    "base_form": "swim",
+    "simple_past": "swam",
+    "meaning_es": "nadar",
+    "grammar_rules": {
+      "aff": "She swam across the lake.",
+      "neg": "She didn't swim in the ocean.",
+      "q": "Did they swim in the morning?"
+    }
+  },
+  {
+    "key": "take",
+    "base_form": "take",
+    "simple_past": "took",
+    "meaning_es": "tomar / llevar",
+    "grammar_rules": {
+      "aff": "She took the wrong bus.",
+      "neg": "She didn't take a taxi.",
+      "q": "Did he take the exam?"
+    }
+  },
+  {
+    "key": "teach",
+    "base_form": "teach",
+    "simple_past": "taught",
+    "meaning_es": "enseñar",
+    "grammar_rules": {
+      "aff": "She taught English abroad.",
+      "neg": "She didn't teach on Fridays.",
+      "q": "Did they teach the new method?"
+    }
+  },
+  {
+    "key": "tell",
+    "base_form": "tell",
+    "simple_past": "told",
+    "meaning_es": "decir / contar / relatar",
+    "grammar_rules": {
+      "aff": "She told a funny story.",
+      "neg": "She didn't tell anyone the secret.",
+      "q": "Did he tell the truth?"
+    }
+  },
+  {
+    "key": "think",
+    "base_form": "think",
+    "simple_past": "thought",
+    "meaning_es": "pensar",
+    "grammar_rules": {
+      "aff": "She thought the movie was great.",
+      "neg": "She didn't think it was a good idea.",
+      "q": "Did they think about it first?"
+    }
+  },
+  {
+    "key": "throw",
+    "base_form": "throw",
+    "simple_past": "threw",
+    "meaning_es": "lanzar / tirar",
+    "grammar_rules": {
+      "aff": "She threw the ball too hard.",
+      "neg": "She didn't throw away the receipt.",
+      "q": "Did he throw the frisbee?"
+    }
+  },
+  {
+    "key": "understand",
+    "base_form": "understand",
+    "simple_past": "understood",
+    "meaning_es": "entender / comprender",
+    "grammar_rules": {
+      "aff": "She understood the instructions.",
+      "neg": "She didn't understand the question.",
+      "q": "Did you understand the lesson?"
+    }
+  },
+  {
+    "key": "wake",
+    "base_form": "wake",
+    "simple_past": "woke",
+    "meaning_es": "despertar / despertarse",
+    "grammar_rules": {
+      "aff": "She woke up before sunrise.",
+      "neg": "She didn't wake up early enough.",
+      "q": "Did the alarm wake you up?"
+    }
+  },
+  {
+    "key": "wear",
+    "base_form": "wear",
+    "simple_past": "wore",
+    "meaning_es": "llevar puesto / vestir",
+    "grammar_rules": {
+      "aff": "She wore a red dress.",
+      "neg": "She didn't wear a jacket.",
+      "q": "Did he wear a tie?"
+    }
+  },
+  {
+    "key": "win",
+    "base_form": "win",
+    "simple_past": "won",
+    "meaning_es": "ganar",
+    "grammar_rules": {
+      "aff": "She won the championship.",
+      "neg": "She didn't win the lottery.",
+      "q": "Did they win the match?"
+    }
+  },
+  {
+    "key": "write",
+    "base_form": "write",
+    "simple_past": "wrote",
+    "meaning_es": "escribir",
+    "grammar_rules": {
+      "aff": "She wrote a poem.",
+      "neg": "She didn't write the report.",
+      "q": "Did he write the email?"
+    }
+  }
 ]

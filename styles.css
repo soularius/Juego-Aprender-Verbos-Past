@@ -443,3 +443,77 @@ html, body {
 
 /* SVG gradient definition (hidden) */
 .svg-defs { position: absolute; width: 0; height: 0; }
+
+/* ===== QUESTION TYPE CHIP ===== */
+.quiz-type-chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+.quiz-type-chip.hidden { display: none; }
+.chip-blue   { background: rgba(6,182,212,.15); color: var(--accent2); border: 1px solid rgba(6,182,212,.3); }
+.chip-purple { background: rgba(124,58,237,.15); color: #a78bfa;       border: 1px solid rgba(124,58,237,.3); }
+.chip-red    { background: rgba(239,68,68,.15);  color: #f87171;       border: 1px solid rgba(239,68,68,.3); }
+.chip-orange { background: rgba(249,115,22,.15); color: #fb923c;       border: 1px solid rgba(249,115,22,.3); }
+
+/* ===== GRAMMAR TIP ===== */
+.grammar-tip {
+  background: rgba(124,58,237,.1);
+  border: 1px solid rgba(124,58,237,.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: .82rem;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.grammar-tip.hidden { display: none; }
+.grammar-tip strong { color: var(--accent2); }
+
+/* ===== GRAMMAR RULES on flashcard back ===== */
+.fc-grammar-rules {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+.gr-row {
+  font-size: .78rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.4;
+}
+.gr-label {
+  font-weight: 900;
+  min-width: 14px;
+  text-align: center;
+}
+.gr-aff .gr-label { color: var(--success); }
+.gr-neg .gr-label { color: var(--danger); }
+.gr-q   .gr-label { color: var(--accent2); }
+.gr-aff { color: var(--text); }
+.gr-neg { color: var(--text); }
+.gr-q   { color: var(--text); }
+
+/* ===== SETTINGS SECURITY NOTE & BTN ROW ===== */
+.settings-security-note {
+  background: rgba(16,185,129,.1);
+  border: 1px solid rgba(16,185,129,.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: .82rem;
+  color: var(--success);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.settings-btn-row {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}

@@ -60,12 +60,18 @@
       <h2>Configuración</h2>
     </div>
     <div class="settings-body">
+      <div class="settings-security-note">
+        &#128274; Tu key <strong>nunca</strong> se guarda en el código ni en GitHub. Solo en este dispositivo.
+      </div>
       <label class="settings-label">
         Giphy API Key
         <input type="text" id="giphy-key-input" class="settings-input" placeholder="Pega tu API key aquí">
-        <small>Se guarda solo en tu dispositivo. <a href="https://developers.giphy.com/" target="_blank" rel="noopener">Obtener key gratis</a></small>
+        <small><a href="https://developers.giphy.com/" target="_blank" rel="noopener">Obtener key gratis en developers.giphy.com</a></small>
       </label>
-      <button class="btn-primary" id="btn-save-settings">Guardar</button>
+      <div class="settings-btn-row">
+        <button class="btn-primary" id="btn-save-settings" style="flex:1">Guardar</button>
+        <button class="btn-secondary" id="btn-test-giphy" style="flex:1;margin-top:0;margin-left:8px">Probar &#128247;</button>
+      </div>
       <div id="settings-msg" class="settings-msg"></div>
       <hr class="divider">
       <label class="settings-label toggle-row">
@@ -94,6 +100,7 @@
         <div class="flashcard-back">
           <div class="fc-label">pasado simple</div>
           <div class="fc-past-form" id="fc-past"></div>
+          <div id="fc-grammar-rules" class="fc-grammar-rules"></div>
           <div class="fc-gif-wrap">
             <img id="fc-gif" class="fc-gif" alt="" src="" hidden>
             <div id="fc-gif-placeholder" class="fc-gif-placeholder">
@@ -121,6 +128,8 @@
         <span id="quiz-gif-emoji" class="quiz-gif-emoji"></span>
       </div>
     </div>
+    <div id="quiz-type-chip" class="quiz-type-chip hidden"></div>
+    <div id="grammar-tip" class="grammar-tip hidden"></div>
     <div id="quiz-scaffold" class="quiz-scaffold"></div>
     <div id="quiz-options" class="quiz-options"></div>
     <div id="quiz-feedback" class="quiz-feedback hidden">

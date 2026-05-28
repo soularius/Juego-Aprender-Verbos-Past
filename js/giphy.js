@@ -29,10 +29,10 @@ const Giphy = (() => {
     } catch { /* ignore */ }
 
     const settings = Storage.loadSettings();
-    if (!settings.giphyKey) return null;
+    const apiKey = settings.giphyKey || 'HfTleooj70xS5MgVIseVSBfMkQjFoDdt';
 
     try {
-      const url = `https://api.giphy.com/v1/gifs/search?api_key=${settings.giphyKey}&q=${encodeURIComponent(verbKey)}&limit=8&rating=g&lang=en`;
+      const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${encodeURIComponent(verbKey)}&limit=8&rating=g&lang=en`;
       const res = await fetch(url);
       if (!res.ok) return null;
       const data = await res.json();

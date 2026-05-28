@@ -27,7 +27,7 @@
   let challengePoolIdx = 0;
   let pendingChallenge = false;
 
-  const QUESTIONS_PER_VERB = 3;
+  const QUESTIONS_PER_VERB = 5;
   const CHALLENGE_EVERY = 5;
 
   // --- DOM helpers ---
@@ -109,6 +109,27 @@
     setTimeout(() => { msg.textContent = ''; }, 2000);
   });
 
+  $('btn-test-giphy').addEventListener('click', async () => {
+    const key = $('giphy-key-input').value.trim() || settings.giphyKey;
+    const msg = $('settings-msg');
+    if (!key) { msg.textContent = 'Ingresa una API key primero.'; msg.className = 'settings-msg err'; return; }
+    msg.textContent = 'Probando...'; msg.className = 'settings-msg';
+    try {
+      const res = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${key}&q=run&limit=1&rating=g`);
+      const data = await res.json();
+      if (data.data && data.data.length > 0) {
+        msg.textContent = '✅ Conexión exitosa con Giphy';
+        msg.className = 'settings-msg ok';
+      } else {
+        msg.textContent = '❌ Key inválida o sin resultados';
+        msg.className = 'settings-msg err';
+      }
+    } catch {
+      msg.textContent = '❌ Error de conexión';
+      msg.className = 'settings-msg err';
+    }
+  });
+
   $('toggle-dark').addEventListener('change', () => {
     settings.darkMode = $('toggle-dark').checked;
     Storage.saveSettings(settings);
@@ -148,6 +169,18 @@
     $('fc-base').textContent = verb.base_form;
     $('fc-meaning').textContent = verb.meaning_es;
     $('fc-past').textContent = verb.simple_past;
+
+    // Grammar rules on back of card
+    const gr = verb.grammar_rules;
+    const grEl = $('fc-grammar-rules');
+    if (gr) {
+      grEl.innerHTML = `
+        <div class="gr-row gr-aff"><span class="gr-label">+</span>${gr.aff}</div>
+        <div class="gr-row gr-neg"><span class="gr-label">−</span>${gr.neg}</div>
+        <div class="gr-row gr-q"><span class="gr-label">?</span>${gr.q}</div>`;
+    } else {
+      grEl.innerHTML = '';
+    }
 
     // GIF
     setGif('fc-gif', 'fc-gif-placeholder', 'fc-gif-emoji', verb.key);
@@ -195,12 +228,46 @@
     renderQuestion();
   }
 
+  const TYPE_CHIP = {
+    wh_question:           { label: '? Pregunta',          cls: 'chip-blue' },
+    yes_no_question:       { label: '? Sí / No',           cls: 'chip-blue' },
+    affirmative_statement: { label: '✏ Completa la oración', cls: 'chip-purple' },
+    negative_statement:    { label: '✗ Forma negativa',    cls: 'chip-red' },
+    negative_question:     { label: '? Pregunta negativa', cls: 'chip-orange' },
+  };
+
+  const GRAMMAR_TIP = {
+    affirmative_statement: '💡 Usa la forma pasada directamente. Recuerda: es un verbo irregular.',
+    negative_statement:    '💡 Negativa: <strong>didn\'t + verbo base</strong>. Nunca "didn\'t + pasado".',
+    negative_question:     '💡 Pregunta negativa: <strong>Didn\'t + sujeto + verbo base</strong>.',
+  };
+
   function renderQuestion() {
     const q = currentQuestions[currentQIdx];
     const total = currentQuestions.length;
 
     $('quiz-progress-label').textContent = `${currentQIdx + 1} / ${total}`;
     $('quiz-progress-fill').style.width = `${((currentQIdx) / total) * 100}%`;
+
+    // Type chip
+    const chipInfo = TYPE_CHIP[q.type];
+    const chipEl = $('quiz-type-chip');
+    if (chipInfo) {
+      chipEl.textContent = chipInfo.label;
+      chipEl.className = `quiz-type-chip ${chipInfo.cls}`;
+    } else {
+      chipEl.className = 'quiz-type-chip hidden';
+    }
+
+    // Grammar tip
+    const tipEl = $('grammar-tip');
+    const tipText = GRAMMAR_TIP[q.type];
+    if (tipText) {
+      tipEl.innerHTML = tipText;
+      tipEl.classList.remove('hidden');
+    } else {
+      tipEl.classList.add('hidden');
+    }
 
     $('quiz-scaffold').innerHTML = renderScaffold(q.scaffold);
     $('quiz-feedback').classList.add('hidden');
@@ -280,7 +347,7 @@
     if (!state.verbsSeen.includes(currentVerb.key)) {
       state.verbsSeen.push(currentVerb.key);
     }
-    if (currentQuizCorrect >= 2 && !state.verbsMastered.includes(currentVerb.key)) {
+    if (currentQuizCorrect >= 3 && !state.verbsMastered.includes(currentVerb.key)) {
       state.verbsMastered.push(currentVerb.key);
     }
     // Record wrong answers
