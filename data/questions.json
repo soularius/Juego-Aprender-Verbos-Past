@@ -1153,7 +1153,6 @@
                     "were / catch",
                     "caught / -"
                 ],
-                "correct_answer": "did / buy",
                 "correct_answer": "did / catch",
                 "rationale": "Interrogación de motivo en pasado simple: requiere 'did' seguido de la raíz limpia del verbo."
             },
@@ -5586,7 +5585,7 @@
                 "scaffold": "What book {{ans_1}} you {{ans_2}} during your beach vacation?",
                 "options": [
                     "did / read",
-                    "did / read (pronounced red)",
+                    "did / readed",
                     "was / read",
                     "read / -"
                 ],
@@ -5599,7 +5598,7 @@
                 "scaffold": "{{ans_1}} she {{ans_2}} the terms and conditions before signing?",
                 "options": [
                     "Did / read",
-                    "Did / read (red)",
+                    "Did / readed",
                     "Was / read",
                     "Does / read"
                 ],
@@ -5612,7 +5611,7 @@
                 "scaffold": "Why {{ans_1}} they {{ans_2}} the announcement aloud to everyone?",
                 "options": [
                     "did / read",
-                    "did / read (red)",
+                    "did / readed",
                     "were / read",
                     "read / -"
                 ],
@@ -5625,7 +5624,7 @@
                 "scaffold": "{{ans_1}} the children {{ans_2}} the instructions carefully?",
                 "options": [
                     "Did / read",
-                    "Did / read (red)",
+                    "Did / readed",
                     "Were / read",
                     "Do / read"
                 ],
@@ -5638,7 +5637,7 @@
                 "scaffold": "How many articles {{ans_1}} he {{ans_2}} for his research project?",
                 "options": [
                     "did / read",
-                    "did / read (red)",
+                    "did / readed",
                     "was / read",
                     "read / -"
                 ],
@@ -5651,7 +5650,7 @@
                 "scaffold": "{{ans_1}} anyone {{ans_2}} the message left on the whiteboard?",
                 "options": [
                     "Did / read",
-                    "Did / read (red)",
+                    "Did / readed",
                     "Was / read",
                     "Does / read"
                 ],
@@ -5664,7 +5663,7 @@
                 "scaffold": "Where {{ans_1}} they {{ans_2}} about the historic discovery?",
                 "options": [
                     "did / read",
-                    "did / read (red)",
+                    "did / readed",
                     "were / read",
                     "read / -"
                 ],
@@ -5677,7 +5676,7 @@
                 "scaffold": "{{ans_1}} your father {{ans_2}} you a bedtime story when you were little?",
                 "options": [
                     "Did / read",
-                    "Did / read (red)",
+                    "Did / readed",
                     "Were / read",
                     "Do / read"
                 ],
@@ -5690,7 +5689,7 @@
                 "scaffold": "Which newspaper {{ans_1}} she {{ans_2}} every morning last year?",
                 "options": [
                     "did / read",
-                    "did / read (red)",
+                    "did / readed",
                     "was / read",
                     "read / -"
                 ],
@@ -5700,10 +5699,10 @@
             {
                 "question_number": 10,
                 "type": "yes_no_question",
-                "scaffold": "{{ans_1}} you {{ans_2}}: Did / read",
+                "scaffold": "{{ans_1}} you {{ans_2}} the entire book in just one day?",
                 "options": [
                     "Did / read",
-                    "Did / read (red)",
+                    "Did / readed",
                     "Was / read",
                     "Has / read"
                 ],
@@ -8157,6 +8156,142 @@
                 ],
                 "correct_answer": "Did / tell",
                 "rationale": "Interrogación cerrada de tipo Yes/No estructurada con el auxiliar de tiempo 'Did' al inicio y la raíz limpia 'tell'."
+            }
+        ]
+    },
+    {
+        "key": "think",
+        "base_form": "think",
+        "questions": [
+            {
+                "question_number": 1,
+                "type": "wh_question",
+                "scaffold": "What {{ans_1}} you {{ans_2}} about during the long flight?",
+                "options": [
+                    "did / think",
+                    "did / thought",
+                    "were / think",
+                    "thought / -"
+                ],
+                "correct_answer": "did / think",
+                "rationale": "El auxiliar 'did' fija el tiempo pasado, por lo que el verbo principal debe estar en su forma base 'think'."
+            },
+            {
+                "question_number": 2,
+                "type": "yes_no_question",
+                "scaffold": "{{ans_1}} she {{ans_2}} the plan was a good idea?",
+                "options": [
+                    "Did / think",
+                    "Did / thought",
+                    "Was / think",
+                    "Does / think"
+                ],
+                "correct_answer": "Did / think",
+                "rationale": "Pregunta cerrada en pasado simple: el auxiliar 'Did' al inicio va seguido del verbo en forma base."
+            },
+            {
+                "question_number": 3,
+                "type": "wh_question",
+                "scaffold": "Why {{ans_1}} he {{ans_2}} the meeting was canceled?",
+                "options": [
+                    "did / think",
+                    "did / thought",
+                    "was / think",
+                    "thought / -"
+                ],
+                "correct_answer": "did / think",
+                "rationale": "Pregunta informativa de pasado simple: estructura fija 'did' + sujeto + verbo base."
+            },
+            {
+                "question_number": 4,
+                "type": "yes_no_question",
+                "scaffold": "{{ans_1}} they {{ans_2}} the price was too high?",
+                "options": [
+                    "Did / think",
+                    "Did / thought",
+                    "Were / think",
+                    "Do / think"
+                ],
+                "correct_answer": "Did / think",
+                "rationale": "Para preguntas de sí/no en pasado simple se usa el auxiliar 'Did' y la forma base del verbo."
+            },
+            {
+                "question_number": 5,
+                "type": "wh_question",
+                "scaffold": "When {{ans_1}} she {{ans_2}} about changing her career?",
+                "options": [
+                    "did / think",
+                    "did / thought",
+                    "was / think",
+                    "thought / -"
+                ],
+                "correct_answer": "did / think",
+                "rationale": "Pregunta temporal sobre un proceso mental pasado: el auxiliar 'did' + sujeto + verbo base 'think'."
+            },
+            {
+                "question_number": 6,
+                "type": "yes_no_question",
+                "scaffold": "{{ans_1}} you {{ans_2}} about studying abroad last year?",
+                "options": [
+                    "Did / think",
+                    "Did / thought",
+                    "Were / think",
+                    "Have / thought"
+                ],
+                "correct_answer": "Did / think",
+                "rationale": "Interrogación de pasado simple sobre una acción concluida: auxiliar 'Did' + verbo base."
+            },
+            {
+                "question_number": 7,
+                "type": "wh_question",
+                "scaffold": "How long {{ans_1}} you {{ans_2}} before making the decision?",
+                "options": [
+                    "did / think",
+                    "did / thought",
+                    "were / think",
+                    "thought / -"
+                ],
+                "correct_answer": "did / think",
+                "rationale": "Pregunta sobre duración de un proceso mental en pasado: el auxiliar 'did' exige la forma base."
+            },
+            {
+                "question_number": 8,
+                "type": "yes_no_question",
+                "scaffold": "{{ans_1}} the teacher {{ans_2}} the students were ready for the exam?",
+                "options": [
+                    "Did / think",
+                    "Did / thought",
+                    "Was / think",
+                    "Does / think"
+                ],
+                "correct_answer": "Did / think",
+                "rationale": "Pregunta de sí/no sobre una creencia pasada: estructura 'Did + sujeto + verbo base'."
+            },
+            {
+                "question_number": 9,
+                "type": "wh_question",
+                "scaffold": "What {{ans_1}} the experts {{ans_2}} about the new discovery?",
+                "options": [
+                    "did / think",
+                    "did / thought",
+                    "were / think",
+                    "thought / -"
+                ],
+                "correct_answer": "did / think",
+                "rationale": "Pregunta sobre una opinión pasada: sigue el patrón estándar de pasado simple con auxiliar 'did'."
+            },
+            {
+                "question_number": 10,
+                "type": "yes_no_question",
+                "scaffold": "{{ans_1}} you {{ans_2}} the movie was going to have a happy ending?",
+                "options": [
+                    "Did / think",
+                    "Did / thought",
+                    "Were / think",
+                    "Do / think"
+                ],
+                "correct_answer": "Did / think",
+                "rationale": "Pregunta cerrada de pasado simple sobre una expectativa: auxiliar 'Did' + sujeto + forma base 'think'."
             }
         ]
     },

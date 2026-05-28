@@ -1,11 +1,197 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Verbs Past</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Verb Quest</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+  <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+    <defs>
+      <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#7c3aed"/>
+        <stop offset="100%" stop-color="#06b6d4"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- HOME -->
+  <div id="view-home" class="view active">
+    <div class="home-header">
+      <h1 class="app-title">Verb Quest</h1>
+      <button class="icon-btn" id="btn-settings" aria-label="Ajustes">&#9881;</button>
+    </div>
+    <div class="progress-ring-wrap">
+      <svg class="progress-ring" viewBox="0 0 120 120">
+        <circle class="ring-bg" cx="60" cy="60" r="50"/>
+        <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="50"/>
+      </svg>
+      <div class="ring-label">
+        <span id="ring-done">0</span>/<span id="ring-total">67</span>
+        <small>verbos</small>
+      </div>
+    </div>
+    <div class="streak-row">
+      <span class="streak-badge">&#128293; <span id="streak-count">0</span> días seguidos</span>
+    </div>
+    <div class="home-btns">
+      <button class="btn-primary" id="btn-continue">Continuar</button>
+      <button class="btn-secondary" id="btn-restart">Empezar desde el inicio</button>
+    </div>
+    <div class="verb-list-toggle">
+      <button class="btn-ghost" id="btn-show-list">Ver todos los verbos</button>
+    </div>
+  </div>
+
+  <!-- VERB LIST -->
+  <div id="view-verb-list" class="view">
+    <div class="view-header">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <h2>Verbos</h2>
+    </div>
+    <div id="verb-list-grid" class="verb-list-grid"></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="view-settings" class="view">
+    <div class="view-header">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <h2>Configuración</h2>
+    </div>
+    <div class="settings-body">
+      <label class="settings-label">
+        Giphy API Key
+        <input type="text" id="giphy-key-input" class="settings-input" placeholder="Pega tu API key aquí">
+        <small>Se guarda solo en tu dispositivo. <a href="https://developers.giphy.com/" target="_blank" rel="noopener">Obtener key gratis</a></small>
+      </label>
+      <button class="btn-primary" id="btn-save-settings">Guardar</button>
+      <div id="settings-msg" class="settings-msg"></div>
+      <hr class="divider">
+      <label class="settings-label toggle-row">
+        Modo oscuro
+        <input type="checkbox" id="toggle-dark" class="toggle" checked>
+      </label>
+      <hr class="divider">
+      <button class="btn-danger" id="btn-reset-progress">Borrar progreso</button>
+    </div>
+  </div>
+
+  <!-- FLASHCARD (intro del verbo) -->
+  <div id="view-flashcard" class="view">
+    <div class="view-header compact">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <span id="fc-verb-index" class="verb-index-label"></span>
+    </div>
+    <div class="flashcard-scene">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-front">
+          <div class="fc-label">verbo en inglés</div>
+          <div class="fc-base-form" id="fc-base"></div>
+          <div class="fc-meaning" id="fc-meaning"></div>
+          <div class="fc-tap-hint">Toca para ver el pasado &#8595;</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-label">pasado simple</div>
+          <div class="fc-past-form" id="fc-past"></div>
+          <div class="fc-gif-wrap">
+            <img id="fc-gif" class="fc-gif" alt="" src="" hidden>
+            <div id="fc-gif-placeholder" class="fc-gif-placeholder">
+              <span id="fc-gif-emoji" class="fc-gif-emoji"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary btn-start-quiz" id="btn-start-quiz">&#9654; Empezar preguntas</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="view-quiz" class="view">
+    <div class="view-header compact">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <span id="quiz-progress-label" class="progress-label">1 / 3</span>
+    </div>
+    <div class="quiz-progress-bar">
+      <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+    </div>
+    <div class="quiz-gif-wrap">
+      <img id="quiz-gif" class="quiz-gif" alt="" src="" hidden>
+      <div id="quiz-gif-placeholder" class="quiz-gif-placeholder">
+        <span id="quiz-gif-emoji" class="quiz-gif-emoji"></span>
+      </div>
+    </div>
+    <div id="quiz-scaffold" class="quiz-scaffold"></div>
+    <div id="quiz-options" class="quiz-options"></div>
+    <div id="quiz-feedback" class="quiz-feedback hidden">
+      <div id="quiz-feedback-icon" class="feedback-icon"></div>
+      <div id="quiz-feedback-text" class="feedback-text"></div>
+      <div id="quiz-rationale" class="quiz-rationale"></div>
+      <button class="btn-primary" id="btn-next-question">Siguiente &#8594;</button>
+    </div>
+  </div>
+
+  <!-- CHALLENGE (60 segundos) -->
+  <div id="view-challenge" class="view">
+    <div class="challenge-header">
+      <span class="challenge-title">&#128293; MODO RETO</span>
+      <div class="challenge-score-wrap">
+        <span class="challenge-score-label">Puntos</span>
+        <span id="challenge-score" class="challenge-score">0</span>
+      </div>
+    </div>
+    <div class="challenge-timer-wrap">
+      <svg class="timer-ring" viewBox="0 0 80 80">
+        <circle class="timer-ring-bg" cx="40" cy="40" r="34"/>
+        <circle class="timer-ring-fill" id="timer-ring-fill" cx="40" cy="40" r="34"/>
+      </svg>
+      <div id="challenge-countdown" class="challenge-countdown">60</div>
+    </div>
+    <div id="challenge-scaffold" class="quiz-scaffold"></div>
+    <div id="challenge-options" class="quiz-options challenge-mode"></div>
+    <div id="challenge-flash" class="challenge-flash hidden"></div>
+  </div>
+
+  <!-- CHALLENGE RESULT -->
+  <div id="view-challenge-result" class="view">
+    <div class="result-wrap">
+      <div class="result-trophy">&#127942;</div>
+      <h2 class="result-title">¡Reto terminado!</h2>
+      <div class="result-score-big" id="result-score-big">0</div>
+      <div class="result-subtitle">puntos en 60 segundos</div>
+      <div class="result-stats">
+        <div class="result-stat"><span id="res-correct">0</span><small>correctas</small></div>
+        <div class="result-stat"><span id="res-wrong">0</span><small>incorrectas</small></div>
+        <div class="result-stat"><span id="res-streak">0</span><small>racha</small></div>
+      </div>
+      <button class="btn-primary" id="btn-after-challenge">Siguiente verbo &#8594;</button>
+    </div>
+  </div>
+
+  <!-- VERB SUMMARY (after quiz) -->
+  <div id="view-summary" class="view">
+    <div class="result-wrap">
+      <div id="summary-icon" class="result-trophy">&#127881;</div>
+      <h2 id="summary-title" class="result-title">¡Verbo aprendido!</h2>
+      <div class="summary-verb-row">
+        <span id="summary-base" class="summary-base"></span>
+        <span class="summary-arrow">&#8594;</span>
+        <span id="summary-past" class="summary-past"></span>
+      </div>
+      <div class="summary-score-row">
+        <span id="summary-correct" class="summary-correct">3</span>/<span id="summary-total">3</span> correctas
+      </div>
+      <div id="summary-wrong-section" class="summary-wrong-section hidden">
+        <p class="wrong-title">Errores en:</p>
+        <div id="summary-wrong-list" class="summary-wrong-list"></div>
+      </div>
+      <button class="btn-primary" id="btn-next-verb">Siguiente verbo &#8594;</button>
+      <button class="btn-ghost" id="btn-home-from-summary">Ir al inicio</button>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/giphy.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
