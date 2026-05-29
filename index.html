@@ -37,6 +37,7 @@
     </div>
     <div class="home-btns">
       <button class="btn-primary" id="btn-continue">Continuar</button>
+      <button class="btn-exam-home" id="btn-show-exam">📝 Examen Final U11–U12</button>
       <button class="btn-secondary" id="btn-restart">Empezar desde el inicio</button>
     </div>
     <div class="verb-list-toggle">
@@ -136,6 +137,8 @@
     <div id="quiz-type-chip" class="quiz-type-chip hidden"></div>
     <div id="grammar-tip" class="grammar-tip hidden"></div>
     <div id="quiz-scaffold" class="quiz-scaffold"></div>
+    <button class="btn-es-hint" id="btn-es-hint">🇪🇸 ver en español</button>
+    <div id="quiz-scaffold-es" class="quiz-scaffold-es" hidden></div>
     <div id="quiz-options" class="quiz-options"></div>
     <div id="quiz-feedback" class="quiz-feedback hidden">
       <div id="quiz-feedback-icon" class="feedback-icon"></div>
@@ -444,6 +447,51 @@
 
     </div><!-- /kb-content -->
   </div><!-- /view-kb -->
+
+  <!-- ===== EXAMEN FINAL ===== -->
+  <div id="view-exam" class="view">
+    <div class="view-header compact">
+      <button class="icon-btn back-btn" data-back="home">&#8592;</button>
+      <span class="exam-badge">📝 EXAMEN FINAL</span>
+      <span id="exam-progress-label" class="progress-label">1 / 20</span>
+    </div>
+    <div class="quiz-progress-bar">
+      <div id="exam-progress-fill" class="quiz-progress-fill exam-fill"></div>
+    </div>
+    <div class="quiz-gif-wrap">
+      <img id="exam-gif" class="quiz-gif" alt="" src="" hidden>
+      <div id="exam-gif-ph" class="quiz-gif-placeholder">
+        <span id="exam-gif-emoji" class="quiz-gif-emoji"></span>
+      </div>
+    </div>
+    <div id="exam-type-chip" class="quiz-type-chip hidden"></div>
+    <div id="exam-scaffold" class="quiz-scaffold"></div>
+    <button class="btn-es-hint" id="btn-exam-es-hint">🇪🇸 ver en español</button>
+    <div id="exam-scaffold-es" class="quiz-scaffold-es" hidden></div>
+    <div id="exam-options" class="quiz-options"></div>
+    <div id="exam-feedback" class="quiz-feedback hidden">
+      <div id="exam-feedback-icon" class="feedback-icon"></div>
+      <div id="exam-feedback-text" class="feedback-text"></div>
+      <img id="exam-correct-gif" class="quiz-correct-gif" alt="" src="" hidden>
+      <div id="exam-rationale" class="quiz-rationale"></div>
+      <button class="btn-primary" id="btn-exam-next">Siguiente &#8594;</button>
+    </div>
+  </div>
+
+  <!-- EXAM RESULT -->
+  <div id="view-exam-result" class="view">
+    <div class="result-wrap">
+      <div id="exam-result-trophy" class="result-trophy">&#127942;</div>
+      <div id="exam-grade-badge" class="exam-grade-badge">A</div>
+      <h2 id="exam-result-title" class="result-title">¡Excelente!</h2>
+      <div class="result-score-big" id="exam-result-score">0</div>
+      <div class="result-subtitle" id="exam-result-subtitle">de 20 correctas</div>
+      <p id="exam-result-msg" class="exam-result-msg"></p>
+      <button class="btn-primary"   id="btn-exam-retry">Repetir examen</button>
+      <button class="btn-secondary" id="btn-exam-study">📚 Estudiar notas</button>
+      <button class="btn-ghost"     id="btn-exam-home">Ir al inicio</button>
+    </div>
+  </div>
 
   <!-- ===== FOOD VOCABULARY QUIZ ===== -->
   <div id="view-food" class="view">

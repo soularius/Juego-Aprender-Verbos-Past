@@ -332,6 +332,13 @@
     }
 
     $('quiz-scaffold').innerHTML = renderScaffold(q.scaffold);
+
+    // Hint en español (oculto por defecto)
+    const esEl = $('quiz-scaffold-es');
+    esEl.hidden = true;
+    esEl.textContent = q.scaffold_es || '';
+    $('btn-es-hint').style.display = q.scaffold_es ? 'inline-flex' : 'none';
+
     $('quiz-feedback').classList.add('hidden');
 
     const opts = $('quiz-options');
@@ -594,6 +601,141 @@
   });
 
   $('btn-show-kb').addEventListener('click', () => showView('kb'));
+
+  // --- Scaffold ES hint toggle (quiz) ---
+  $('btn-es-hint').addEventListener('click', () => {
+    const el = $('quiz-scaffold-es');
+    el.hidden = !el.hidden;
+  });
+  $('btn-exam-es-hint').addEventListener('click', () => {
+    const el = $('exam-scaffold-es');
+    el.hidden = !el.hidden;
+  });
+
+  // --- EXAMEN FINAL ---
+  const EXAM_KEYS = [
+    'be', 'colors_past', 'adjectives_past', 'uncertainty',
+    'some_any', 'eat', 'drink', 'go', 'take', 'buy',
+    'have', 'do', 'come', 'say', 'think',
+    'get', 'make', 'know', 'see', 'give',
+  ];
+  const EXAM_TOTAL = 20;
+
+  let examItems = [];
+  let examIdx   = 0;
+  let examScore = 0;
+
+  function startExam() {
+    // 1 pregunta aleatoria por clave, mezcladas
+    examItems = EXAM_KEYS
+      .map(key => {
+        const pool = questionsMap[key] || [];
+        if (!pool.length) return null;
+        return { ...pool[Math.floor(Math.random() * pool.length)], verbKey: key };
+      })
+      .filter(Boolean)
+      .sort(() => Math.random() - .5)
+      .slice(0, EXAM_TOTAL);
+
+    examIdx   = 0;
+    examScore = 0;
+    showView('exam');
+    renderExamQuestion();
+  }
+
+  function renderExamQuestion() {
+    const q     = examItems[examIdx];
+    const total = examItems.length;
+
+    $('exam-progress-label').textContent = `${examIdx + 1} / ${total}`;
+    $('exam-progress-fill').style.width  = `${(examIdx / total) * 100}%`;
+
+    setGif('exam-gif', 'exam-gif-ph', 'exam-gif-emoji', q.verbKey);
+
+    const chipInfo = TYPE_CHIP[q.type];
+    const chipEl   = $('exam-type-chip');
+    if (chipInfo) { chipEl.textContent = chipInfo.label; chipEl.className = `quiz-type-chip ${chipInfo.cls}`; }
+    else           { chipEl.className = 'quiz-type-chip hidden'; }
+
+    $('exam-scaffold').innerHTML = renderScaffold(q.scaffold);
+
+    // Hint en español (oculto por defecto)
+    const esEl = $('exam-scaffold-es');
+    esEl.hidden = true;
+    esEl.textContent = q.scaffold_es || '';
+    $('btn-exam-es-hint').style.display = q.scaffold_es ? 'inline-flex' : 'none';
+
+    $('exam-feedback').classList.add('hidden');
+    $('exam-correct-gif').hidden = true;
+
+    const opts = $('exam-options');
+    opts.innerHTML = '';
+    [...q.options].sort(() => Math.random() - .5).forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => selectExamAnswer(btn, opt, q));
+      opts.appendChild(btn);
+    });
+  }
+
+  function selectExamAnswer(btn, chosen, q) {
+    $('exam-options').querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+    const correct = chosen === q.correct_answer;
+
+    if (correct) {
+      btn.classList.add('correct');
+      examScore++;
+      showFeedbackGif(Giphy.getCelebrationGif(), $('exam-correct-gif'));
+    } else {
+      btn.classList.add('wrong');
+      $('exam-options').querySelectorAll('.option-btn').forEach(b => {
+        if (b.textContent === q.correct_answer) b.classList.add('correct');
+      });
+      showFeedbackGif(Giphy.getWrongGif(), $('exam-correct-gif'));
+    }
+
+    $('exam-scaffold').innerHTML = renderAnswered(q.scaffold, q.correct_answer, correct);
+    $('exam-feedback-icon').textContent = correct ? '✅' : '❌';
+    $('exam-feedback-text').textContent = correct ? '¡Correcto!' : 'Incorrecto';
+    $('exam-rationale').textContent     = q.rationale;
+    $('exam-feedback').classList.remove('hidden');
+    btn.classList.add(correct ? 'bounce-in' : 'shake');
+  }
+
+  $('btn-exam-next').addEventListener('click', () => {
+    examIdx++;
+    if (examIdx < examItems.length) {
+      renderExamQuestion();
+    } else {
+      showExamResult();
+    }
+  });
+
+  function showExamResult() {
+    const pct = examScore / examItems.length;
+    let grade, trophy, title, msg;
+
+    if      (pct >= 0.92) { grade = 'A'; trophy = '🏆'; title = '¡Sobresaliente!';     msg = '¡Dominas las unidades 11 y 12! Excelente trabajo.'; }
+    else if (pct >= 0.80) { grade = 'B'; trophy = '🥇'; title = '¡Muy bien!';           msg = 'Muy buen desempeño. Repasa los errores para llegar al 100%.'; }
+    else if (pct >= 0.68) { grade = 'C'; trophy = '🥈'; title = '¡Bien!';               msg = 'Vas por buen camino. Estudia las notas de clase para mejorar.'; }
+    else if (pct >= 0.60) { grade = 'D'; trophy = '🥉'; title = 'Aprobado';             msg = 'Pasaste, pero conviene repasar was/were y el pasado simple.'; }
+    else                  { grade = 'F'; trophy = '📚'; title = 'Sigue practicando';    msg = 'Revisa las notas de clase y practica más con el juego.'; }
+
+    $('exam-result-trophy').textContent    = trophy;
+    $('exam-grade-badge').textContent      = grade;
+    $('exam-grade-badge').className        = `exam-grade-badge grade-${grade.toLowerCase()}`;
+    $('exam-result-title').textContent     = title;
+    $('exam-result-score').textContent     = examScore;
+    $('exam-result-subtitle').textContent  = `de ${examItems.length} correctas`;
+    $('exam-result-msg').textContent       = msg;
+    showView('exam-result');
+  }
+
+  $('btn-exam-retry').addEventListener('click', startExam);
+  $('btn-exam-study').addEventListener('click', () => showView('kb'));
+  $('btn-exam-home').addEventListener('click', () => { renderHome(); showView('home'); });
+  $('btn-show-exam').addEventListener('click', startExam);
 
   // --- FOOD VOCABULARY QUIZ ---
   const FOOD_VOCAB = [

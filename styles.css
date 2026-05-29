@@ -680,6 +680,86 @@ html, body {
 }
 .color-swatch small { font-weight: 400; font-size: .72rem; display: block; }
 
+/* ===== SCAFFOLD ES HINT ===== */
+.btn-es-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(6,182,212,.1);
+  border: 1px solid rgba(6,182,212,.3);
+  border-radius: 999px;
+  color: var(--accent2);
+  font-size: .75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  cursor: pointer;
+  margin: 4px 0 2px;
+  transition: background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-es-hint:active { background: rgba(6,182,212,.2); }
+.quiz-scaffold-es {
+  background: rgba(6,182,212,.08);
+  border: 1px solid rgba(6,182,212,.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: .9rem;
+  color: var(--accent2);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 4px;
+  animation: fade-in .2s ease;
+}
+
+/* ===== EXAMEN FINAL ===== */
+.exam-badge {
+  font-size: .85rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .03em;
+  margin-left: 2px;
+}
+.exam-fill {
+  background: linear-gradient(90deg, #f59e0b, #ef4444) !important;
+}
+.btn-exam-home {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid #f59e0b;
+  border-radius: var(--radius);
+  background: rgba(245,158,11,.1);
+  color: #f59e0b;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background .15s, transform .1s;
+}
+.btn-exam-home:active { transform: scale(.97); }
+.exam-grade-badge {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 4px 0 8px;
+}
+.grade-a { color: #10b981; }
+.grade-b { color: #06b6d4; }
+.grade-c { color: #f59e0b; }
+.grade-d { color: #f97316; }
+.grade-f { color: #ef4444; }
+.exam-result-msg {
+  font-size: .9rem;
+  color: var(--text2);
+  text-align: center;
+  line-height: 1.6;
+  margin: 8px 0 16px;
+  max-width: 280px;
+}
+
 /* ===== FOOD VOCABULARY QUIZ ===== */
 .food-scaffold {
   display: flex;
